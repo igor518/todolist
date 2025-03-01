@@ -31,4 +31,4 @@ jobs:
             cd ../ && 
             docker compose down && 
             docker compose up -d &&
-            docker exec -it --user www-data php bash -c "cd /var/www && composer install"
+            docker exec --user www-data php bash -c "cd /var/www && composer install"
