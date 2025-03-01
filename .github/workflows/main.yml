@@ -7,8 +7,14 @@ on:
 
 jobs:
   deploy:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set safe directory
+        run: git config --global --add safe.directory ~/www/todolist/project/todolist/.github/workflows
+      
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -19,7 +25,7 @@ jobs:
           script_stop: true
           command_timeout: 200m
           script:
-            cd www/todolist/project/todolist &&
+            cd ~/www/todolist/project/todolist &&
             git pull &&
             cd ../ && 
             docker compose dowm && 
