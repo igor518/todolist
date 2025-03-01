@@ -24,7 +24,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           command_timeout: 200m
-          script:
+          script: |
             cd ~/www/todolist/project/todolist &&
             git reset --hard &&
             git pull origin main &&
