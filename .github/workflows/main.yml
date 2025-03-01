@@ -26,7 +26,8 @@ jobs:
           command_timeout: 200m
           script:
             cd ~/www/todolist/project/todolist &&
-            git pull &&
+            git reset --hard &&
+            git pull origin main &&
             cd ../ && 
             docker compose dowm && 
             docker compose up -d &&
