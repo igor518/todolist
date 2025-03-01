@@ -19,7 +19,7 @@ jobs:
           script_stop: true
           command_timeout: 200m
           script:
-            cd ~/www/todolist/project/todolist &&
+            cd www/todolist/project/todolist &&
             git pull &&
             cd ../ && 
             docker compose dowm && 
