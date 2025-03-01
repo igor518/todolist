@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set safe directory
-        run: git config --global --add safe.directory ~/www/todolist/project/todolist/.github/workflows
+        run: git config --global --add safe.directory /***/www/todolist/project/todolist
       
       - name: Deploy
         uses: appleboy/ssh-action@master
