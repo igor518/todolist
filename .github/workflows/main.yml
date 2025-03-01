@@ -29,6 +29,6 @@ jobs:
             git reset --hard &&
             git pull origin main &&
             cd ../ && 
-            docker compose dowm && 
+            docker compose down && 
             docker compose up -d &&
             docker exec -it --user www-data php bash -c "cd /var/www && composer install"
