@@ -19,9 +19,9 @@ jobs:
           script_stop: true
           command_timeout: 200m
           script:
-            cd /home/www/todolist/project/todolist
-            git pull
-            cd ../
-            docker compose dowm
-            docker compose up -d
+            cd /home/www/todolist/project/todolist &&
+            git pull &&
+            cd ../ && 
+            docker compose dowm && 
+            docker compose up -d &&
             docker exec -it --user www-data php bash -c "cd /var/www && composer install"
