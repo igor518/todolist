@@ -32,3 +32,4 @@ jobs:
             docker compose down && 
             docker compose up -d &&
             docker exec --user www-data php bash -c "cd /var/www && composer install"
+            docker exec --user www-data php bash -c "php bin/console tailwind:build"
