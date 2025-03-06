@@ -19,6 +19,7 @@
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
         "symfony/flex": "^2",
+        "symfony/form": "7.2.*",
         "symfony/framework-bundle": "7.2.*",
         "symfony/maker-bundle": "^1.62",
         "symfony/monolog-bundle": "^3.0",
