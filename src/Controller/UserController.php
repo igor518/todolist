@@ -9,7 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticatorManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class UserController extends AbstractController
 {
@@ -35,21 +36,22 @@ class UserController extends AbstractController
     }
 
     #[Route('user/save', name: 'user_save')]
-    public function save(Request $request, EntityManagerInterface $entityManager): Response
-    {
+    public function save(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $userPasswordHasher,
+        Security $security
+    ): Response {
         $user = new User();
-
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // TODO: Authenticate user.
             $user = $form->getData();
+            $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
-
-
+            $security->login($user);
             return $this->redirectToRoute('main_index');
         }
         return $this->render('user/registration.html.twig', ['form' => $form]);
