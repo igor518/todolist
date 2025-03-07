@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        html, body {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f3f4f6;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-2xl w-full">
+        <h2 class="text-2xl font-bold text-center mb-6">{{ 'Registration' |trans|raw }}</h2>
+        {{ form_start(form) }}
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'First Name' |trans|raw }}</label>
+                    {{
+                        form_widget(form.firstname, {
+                            'attr': {
+                                'class': 'mt-1 p-2 w-full border rounded-lg',
+                                'placeholder': 'John'
+                            }
+                        })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Last Name' |trans|raw }}</label>
+                    {{
+                        form_widget(form.lastname, {
+                            'attr': {
+                                'class': 'mt-1 p-2 w-full border rounded-lg',
+                                'placeholder': 'Doe'
+                            }
+                        })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Email' |trans|raw }}</label>
+                    {{
+                        form_widget(form.email, {
+                            'attr': {
+                                'class': 'mt-1 p-2 w-full border rounded-lg',
+                                'placeholder': 'john.doe@example.com'
+                            }
+                        })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Phone' |trans|raw }}</label>
+                    {{
+                        form_widget(form.phone, {
+                            'attr': {
+                                'class': 'mt-1 p-2 w-full border rounded-lg',
+                                'placeholder': '123-456-7890'
+                            }
+                        })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Country' |trans|raw }}</label>
+                    {{
+                        form_widget(form.country, {
+                            'attr': {
+                                'class': 'mt-1 p-2 w-full border rounded-lg',
+                                'placeholder': 'United States'
+                            }
+                        })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'City' |trans|raw }}</label>
+                    {{
+                    form_widget(form.city, {
+                        'attr': {
+                            'class': 'mt-1 p-2 w-full border rounded-lg',
+                            'placeholder': 'New York'
+                        }
+                    })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Street' |trans|raw }}</label>
+                    {{
+                    form_widget(form.street, {
+                        'attr': {
+                            'class': 'mt-1 p-2 w-full border rounded-lg',
+                            'placeholder': 'Time square 1'
+                        }
+                    })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Postcode' |trans|raw }}</label>
+                    {{
+                    form_widget(form.postcode, {
+                        'attr': {
+                            'class': 'mt-1 p-2 w-full border rounded-lg',
+                            'placeholder': '50309'
+                        }
+                    })
+                    }}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">{{ 'Password' |trans|raw }}</label>
+                    {{
+                    form_widget(form.password, {
+                        'attr': {
+                            'class': 'mt-1 p-2 w-full border rounded-lg',
+                            'placeholder': '•••••••'
+                        }
+                    })
+                    }}
+                </div>
+            </div>
+            <div class="mt-6 flex justify-center space-x-6">
+                 {{ form_widget(form.save, {'label':'Register', 'attr': {
+                     'class': 'px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700'}})
+                 }}
+                <a href="{{ path('main_index') }}" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 text-center">{{ 'Cancel' }}</a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
