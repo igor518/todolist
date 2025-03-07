@@ -19,6 +19,10 @@
 /var/log/*
 !var/log/.gitkeep
 
+.idea/
+.composer/
+.bash_history
+
 # Parameters
 /app/config/parameters.yml
 /app/config/parameters.ini
