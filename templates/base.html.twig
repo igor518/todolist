@@ -12,15 +12,20 @@
         {% endblock %}
     </head>
     <body>
-        <header class="absolute top-4 right-4 flex space-x-4">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <p>{{ 'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }} !</p>
-                <form action="{{ path('app_logout') }}" method="post">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                    <button type="submit">Logout</button>
-                </form>
-            {% endif %}
-            {% block header %}{% endblock %}
+        <header class="block px-6">
+            <nav class="relative flex items-center justify-between">
+                <a href="/" class="flex items-center h-24 py-2">
+                    <img src="{{ asset('images/logo.svg') }}" alt="TickTick" class="h-auto">
+                </a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <p>{{ 'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }} !</p>
+                    <form action="{{ path('app_logout') }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                        <button type="submit">{{ 'Logout'|trans|raw }}</button>
+                    </form>
+                {% endif %}
+                {% block header %}{% endblock %}
+            </nav>
         </header>
         {% block body %}{% endblock %}
     </body>
