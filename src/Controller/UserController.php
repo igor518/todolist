@@ -47,6 +47,11 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+            if ($existingUser) {
+                $this->addFlash('error', 'This email is already registered.');
+                return $this->redirectToRoute('user_register');
+            }
             $user = $form->getData();
             $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);

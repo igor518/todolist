@@ -13,6 +13,9 @@
 {% block body %}
     <div class="bg-white p-8 rounded-2xl shadow-lg max-w-2xl w-full">
         <h2 class="text-2xl font-bold text-center mb-6">{{ 'Registration' |trans|raw }}</h2>
+        {% for message in app.flashes('error') %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"">{{ message }}</div>
+        {% endfor %}
         {{ form_start(form) }}
             <div class="grid grid-cols-2 gap-4">
                 <div>
