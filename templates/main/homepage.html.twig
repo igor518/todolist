@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}
-    {{ 'TIKTIK Home' |trans|raw }}
+    {{ 'TICKTICK Home' |trans|raw }}
 {% endblock %}
 {% block header %}
     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -8,47 +8,48 @@
             <a href="{{ path('user_register') }}"
                class="relative inline-block text-gray-700 border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition duration-300 overflow-hidden hover:text-white before:absolute before:inset-0 before:bg-white before:transition before:duration-300 before:z-0 hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
             >
-                        <span class="relative z-10">
-                            {{ 'Register'|trans|raw }}
-                        </span>
+                <span class="relative z-10">
+                    {{ 'Register'|trans|raw }}
+                </span>
             </a>
             <a
-                    href="{{ path('user_login') }}"
-                    class="relative inline-block text-gray-700 border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition duration-300 overflow-hidden hover:text-white before:absolute before:inset-0 before:bg-white before:transition before:duration-300 before:z-0 hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
+                href="{{ path('user_login') }}"
+                class="relative inline-block text-gray-700 border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition duration-300 overflow-hidden hover:text-white before:absolute before:inset-0 before:bg-white before:transition before:duration-300 before:z-0 hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
             >
-                        <span class="relative z-10">
-                            {{ 'Login' |trans|raw }}
-                        </span>
+                <span class="relative z-10">
+                    {{ 'Login' |trans|raw }}
+                </span>
             </a>
         </div>
     {% endif %}
 {% endblock %}
 {% block body %}
     <main>
-        <section class="w-full px-6 lg:px-20 py-24 relative flex items-center"
-    style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;">
-        <div class="max-w-5xl">
-        <h1 class="text-5xl font-bold tracking-wide text-primary text-left leading-[1.5]">
-            Organize Your Tasks, <br> Boost Your Productivity
-        </h1>
-        <p class="mt-4 text-2xl text-white text-left">
-            Dream. Plan. Achieve! &#x1F680;
-        </p>
-        <p class="mt-4 text-2xl text-white text-left">
-            Set your plans for the day, week, or month. <br> Write down your goals, create to-do and dream lists, and take steps toward greatness. <br> Track your progress and accomplish more!
-        </p>
-        <div class="mt-8 flex space-x-6">
-            <a href="{{ path('user_register') }}" 
-                class="relative inline-block text-white border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition duration-300 overflow-hidden 
-                bg-gradient-to-r from-[#1A237E] to-[#03A9F4] hover:text-gray-700"
+        <section 
+            class="w-full px-6 lg:px-20 py-24 relative flex items-center"
+            style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;"
             >
-            <span class="absolute inset-0 bg-white scale-0 transition-transform duration-300 origin-center hover:scale-100"></span>
-                <span class="relative z-10">
+            <div class="max-w-5xl">
+                <h1 class="text-5xl font-bold tracking-wide text-primary text-left leading-[1.5]">
+                    Organize Your Tasks, <br> Boost Your Productivity
+                </h1>
+                <p class="mt-4 text-2xl text-white text-left">
+                    Dream. Plan. Achieve! &#x1F680;
+                </p>
+                <p class="mt-4 text-2xl text-white text-left">
+                    Set your plans for the day, week, or month. <br> Write down your goals, create to-do and dream lists, and take steps toward greatness. <br> Track your progress and accomplish more!
+                </p>
+                <div class="mt-8 flex space-x-6">
+                    <a 
+                        href="{{ path('user_register') }}" 
+                        class="relative inline-block text-white border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 
+                        bg-gradient-to-r from-[#1A237E] to-[#03A9F4] 
+                        hover:from-[#3949AB] hover:to-[#29B6F6]"
+                    >
                         {{ 'Get started'|trans|raw }}
-                </span>
-            </a>
-        </div>
-    </div>
-    </section>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 {% endblock %}
