@@ -1,130 +1,162 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     <style>
-        html, body {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f3f4f6;
-        }
     </style>
 {% endblock %}
 {% block body %}
-    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-2xl w-full">
-        <h2 class="text-2xl font-bold text-center mb-6">{{ 'Registration' |trans|raw }}</h2>
+<main 
+    class="py-3";
+    style="background-image: url('{{ asset('images/register_page.png') }}'); background-size: cover; background-position: center;"
+>
+
+    <div class="max-w-2xl mx-auto bg-light p-8 rounded-xl shadow-lg">
+        <h2 class="text-3xl font-bold text-center text-primary mb-6 uppercase">{{ 'Registration' |trans|raw }}</h2>
+
         {% for message in app.flashes('error') %}
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert"">{{ message }}</div>
         {% endfor %}
+
         {{ form_start(form) }}
-            <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="relative">
+                        {{
+                            form_widget(form.firstname, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'First Name' |trans|raw }}</label>
+                    </div>
+                    <div class="relative">
+                        {{
+                            form_widget(form.lastname, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Last Name' |trans|raw }}</label>
+                    </div>
+                </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'First Name' |trans|raw }}</label>
+                    <div class="relative">
+                        {{
+                            form_widget(form.email, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Email' |trans|raw }}</label>
+                    </div>
+                    <div class="relative">
+                        {{
+                            form_widget(form.phone, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Phone' |trans|raw }}</label>
+                        
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="relative">
+                        {{
+                            form_widget(form.country, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Country' |trans|raw }}</label>
+                    </div>
+                    <div class="relative">
+                        {{
+                            form_widget(form.city, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'City' |trans|raw }}</label>
+                    </div>
+                    <div class="relative">
+                        {{
+                            form_widget(form.street, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Street' |trans|raw }}</label>
+                    </div>
+                    <div class="relative">
+                        {{
+                            form_widget(form.postcode, {
+                                'attr': {
+                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                    'placeholder': ''
+                                }
+                            })
+                        }}
+                        <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Postcode' |trans|raw }}</label>
+
+                    </div>
+                </div>
+
+                <div class="relative">
                     {{
-                        form_widget(form.firstname, {
+                        form_widget(form.password, {
                             'attr': {
-                                'class': 'mt-1 p-2 w-full border rounded-lg',
-                                'placeholder': 'John'
+                                'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer',
+                                'placeholder': ''
                             }
                         })
                     }}
+                    <label class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Password' |trans|raw }}</label>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Last Name' |trans|raw }}</label>
-                    {{
-                        form_widget(form.lastname, {
-                            'attr': {
-                                'class': 'mt-1 p-2 w-full border rounded-lg',
-                                'placeholder': 'Doe'
-                            }
-                        })
-                    }}
+                <div class="mt-4">
+                    <label class="inline-flex items-center">
+                        <span class="ml-2 text-sm text-gray-600">
+                            {{ 'I agree to the' |trans }} 
+                            <a href="/" class="text-secondary hover:underline">{{ 'privacy policy' |trans }}</a>
+                        </span>
+                    </label>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Email' |trans|raw }}</label>
-                    {{
-                        form_widget(form.email, {
-                            'attr': {
-                                'class': 'mt-1 p-2 w-full border rounded-lg',
-                                'placeholder': 'john.doe@example.com'
-                            }
-                        })
+
+                <div class="mt-6 flex justify-center space-x-6">
+                    {{ form_widget(form.save, {'label': 'Register', 'attr': {
+                        'class': 'relative inline-block text-white border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-gradient-to-r from-[#1A237E] to-[#03A9F4] hover:from-[#3949AB] hover:to-[#29B6F6]'}}) 
                     }}
+                <a 
+                    href="{{ path('main_index') }}" 
+                    class="relative inline-block text-black border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-white hover:bg-black hover:text-white"
+                >
+                    {{ 'Cancel' }}
+                </a>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Phone' |trans|raw }}</label>
-                    {{
-                        form_widget(form.phone, {
-                            'attr': {
-                                'class': 'mt-1 p-2 w-full border rounded-lg',
-                                'placeholder': '123-456-7890'
-                            }
-                        })
-                    }}
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Country' |trans|raw }}</label>
-                    {{
-                        form_widget(form.country, {
-                            'attr': {
-                                'class': 'mt-1 p-2 w-full border rounded-lg',
-                                'placeholder': 'United States'
-                            }
-                        })
-                    }}
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'City' |trans|raw }}</label>
-                    {{
-                    form_widget(form.city, {
-                        'attr': {
-                            'class': 'mt-1 p-2 w-full border rounded-lg',
-                            'placeholder': 'New York'
-                        }
-                    })
-                    }}
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Street' |trans|raw }}</label>
-                    {{
-                    form_widget(form.street, {
-                        'attr': {
-                            'class': 'mt-1 p-2 w-full border rounded-lg',
-                            'placeholder': 'Time square 1'
-                        }
-                    })
-                    }}
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Postcode' |trans|raw }}</label>
-                    {{
-                    form_widget(form.postcode, {
-                        'attr': {
-                            'class': 'mt-1 p-2 w-full border rounded-lg',
-                            'placeholder': '50309'
-                        }
-                    })
-                    }}
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">{{ 'Password' |trans|raw }}</label>
-                    {{
-                    form_widget(form.password, {
-                        'attr': {
-                            'class': 'mt-1 p-2 w-full border rounded-lg',
-                            'placeholder': '•••••••'
-                        }
-                    })
-                    }}
+                            <div class="flex items-center mt-4">
+                <div class="flex mt-6 mx-auto">
+                    <p class="text-sm text-gray-600 text-center">
+                        {{ 'Already have an account?' |trans }} 
+                        <a href="{{ path('user_login') }}" class="text-secondary hover:underline">{{ 'Login here' |trans }}</a>
+                    </p>
                 </div>
             </div>
-            <div class="flex items-center mt-4">
-            <div class="mt-6 flex justify-center space-x-6">
-                 {{ form_widget(form.save, {'label':'Register', 'attr': {
-                     'class': 'px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700'}})
-                 }}
-                <a href="{{ path('main_index') }}" class="px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 text-center">{{ 'Cancel' }}</a>
-            </div>
+            </div>                
+            
         {{ form_end(form) }}
+        
     </div>
+</main>
 {% endblock %}
