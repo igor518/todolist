@@ -56,7 +56,7 @@ class UserController extends AbstractController
             $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
-            $security->login($user);
+            $security->login($user, 'form_login');
             return $this->redirectToRoute('main_index');
         }
         return $this->render('user/registration.html.twig', ['form' => $form]);
