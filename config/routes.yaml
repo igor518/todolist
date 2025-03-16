@@ -6,6 +6,6 @@ controllers:
 app_logout:
     path: /logout
 overblog_graphql_endpoint:
-    path: /graphql
+    path: /graph
     controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
     methods: [POST, GET]
