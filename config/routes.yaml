@@ -5,7 +5,3 @@ controllers:
     type: attribute
 app_logout:
     path: /logout
-overblog_graphql_endpoint:
-    path: /graph
-    controller: Overblog\GraphQLBundle\Controller\GraphController::endpointAction
-    methods: [POST, GET]
