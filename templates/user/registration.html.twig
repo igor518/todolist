@@ -1,28 +1,23 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     <style>
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-    .btn-primary {
-        @apply px-5 py-3 text-lg font-semibold uppercase tracking-wide transition bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md;
-    }
-
-    .btn-secondary {
-        @apply relative inline-block text-black border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-white hover:bg-black hover:text-white
-    }
-
-
+        .register__page {
+            background-image: url('/images/register_page.png'); 
+            background-size: cover; 
+            background-position: center;
+        }
     </style>                       
 
 {% endblock %}
 {% block body %}
 <main 
-    class="py-3"
-    style="background-image: url('{{ asset('images/register_page.png') }}'); background-size: cover; background-position: center;"
+    class="py-6 register__page"
 >
 
     <div class="max-w-2xl mx-auto bg-light p-8 rounded-xl shadow-lg">
@@ -156,22 +151,19 @@
                     {{ form_widget(form.save, {'label': 'Register', 'attr': {
                         'class': 'relative inline-block text-white border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-gradient-to-r from-[#1A237E] to-[#03A9F4] hover:from-[#3949AB] hover:to-[#29B6F6]'}}) 
                     }}
-                <a 
-                    href="{{ path('main_index') }}" 
-                    class="relative inline-block text-black border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-white hover:bg-black hover:text-white"
-                >
-                    {{ 'Cancel' }}
-                </a>
-                </div>
-                            <div class="flex items-center mt-4">
-                <div class="flex mt-6 mx-auto">
+                    <a 
+                        href="{{ path('main_index') }}" 
+                        class="relative inline-block text-black border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-white hover:bg-black hover:text-white"
+                    >
+                        {{ 'Cancel' }}
+                    </a>
+                </div>    
+                <div class="flex mx-auto items-center">
                     <p class="text-sm text-gray-600 text-center">
                         {{ 'Already have an account?' |trans }} 
                         <a href="{{ path('user_login') }}" class="text-secondary hover:underline">{{ 'Login here' |trans }}</a>
                     </p>
-                </div>
-            </div>
-            </div>                
+                </div>           
             
         {{ form_end(form) }}
         
