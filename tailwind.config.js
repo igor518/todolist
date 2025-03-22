@@ -4,6 +4,12 @@ module.exports = {
     "./assets/**/*.js",
     "./templates/**/*.html.twig",
   ],
+  safelist: [
+    'py-6',
+    'py-12',
+    'py-24',
+    'py-[24px]'
+  ],
   theme: {
     extend: {
       colors: {
