@@ -1,33 +1,27 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
     <style>
     form {
         display: flex;
         flex-direction: column;
         gap: 1rem;
     }
-
     .btn-primary {
         @apply px-5 py-3 text-lg font-semibold uppercase tracking-wide transition bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md;
     }
-
     .btn-secondary {
         @apply relative inline-block text-black border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-white hover:bg-black hover:text-white
     }
-
-
-    </style>                       
-
+    </style>
 {% endblock %}
 {% block body %}
 <main 
     class="py-3"
-    style="background-image: url('{{ asset('images/register_page.png') }}'); background-size: cover; background-position: center;"
+    style="background-image: url('/images/register_page.png'); background-size: cover; background-position: center;"
 >
-
     <div class="max-w-2xl mx-auto bg-light p-8 rounded-xl shadow-lg">
         <h2 class="text-3xl font-bold text-center text-primary mb-6 uppercase">{{ 'Registration' |trans|raw }}</h2>
-
         {% for message in app.flashes('error') %}
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{{ message }}</div>
         {% endfor %}
@@ -163,18 +157,15 @@
                     {{ 'Cancel' }}
                 </a>
                 </div>
-                            <div class="flex items-center mt-4">
-                <div class="flex mt-6 mx-auto">
-                    <p class="text-sm text-gray-600 text-center">
-                        {{ 'Already have an account?' |trans }} 
-                        <a href="{{ path('user_login') }}" class="text-secondary hover:underline">{{ 'Login here' |trans }}</a>
-                    </p>
+                <div class="flex items-center mt-4">
+                    <div class="flex mt-6 mx-auto">
+                        <p class="text-sm text-gray-600 text-center">
+                            {{ 'Already have an account?' |trans }}
+                            <a href="{{ path('user_login') }}" class="text-secondary hover:underline">{{ 'Login here' |trans }}</a>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            </div>                
-            
         {{ form_end(form) }}
-        
     </div>
 </main>
 {% endblock %}
