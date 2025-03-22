@@ -33,4 +33,3 @@ jobs:
             docker compose up -d &&
             docker exec --user www-data php bash -c "cd /var/www && composer install"
             docker exec --user www-data php bash -c "cd /var/www && php bin/console doctrine:migrations:migrate"
-            docker exec --user www-data php bash -c "cd /var/www && npm install && npm run dev"
