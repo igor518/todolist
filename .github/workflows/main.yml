@@ -31,6 +31,7 @@ jobs:
             cd ../ && 
             docker compose down && 
             docker compose up -d &&
+            docker compose run node npm install && 
+            docker compose run node npm run dev &&
             docker exec --user www-data php bash -c "cd /var/www && composer install"
             docker exec --user www-data php bash -c "cd /var/www && php bin/console doctrine:migrations:migrate"
-            docker exec --user www-data php bash -c "cd /var/www && npm install && npm run dev"
