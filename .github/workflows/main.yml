@@ -38,4 +38,4 @@ jobs:
         run: docker compose run node npm install
 
       - name: Build Assets
-        run: docker compose run --rm node npm run dev
+        run: docker compose run node npm run dev
