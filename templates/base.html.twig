@@ -3,19 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="{{ asset('images/favicon.svg') }}">
+        <link rel="icon" href="/images/favicon.svg">
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
         <header class="block px-6">
             <nav class="relative flex items-center justify-between">
                 <a href="/" class="flex items-center h-24 py-2">
-                    <img src="{{ asset('images/logo.svg') }}" alt="TickTick" class="h-auto">
+                    <img src="/images/logo.svg" alt="TickTick" class="h-auto">
                 </a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <p>{{ 'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }} !</p>
