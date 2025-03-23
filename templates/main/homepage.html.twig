@@ -1,4 +1,53 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(200px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-200px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .fade-in-row {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .fade-in-row:nth-child(3),
+        .fade-in-row:nth-child(4) {
+            opacity: 0;
+            transform: translateX(-200px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-row:nth-child(1),
+        .fade-in-row:nth-child(2),
+        .fade-in-row:nth-child(5),
+        .fade-in-row:nth-child(6)  {
+            transform: translateX(200px);
+        }
+
+        .fade-in-row.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+{% endblock %}
 {% block title %}
     {{ 'TICKTICK Home' |trans|raw }}
 {% endblock %}
@@ -51,5 +100,46 @@
                 </div>
             </div>
         </section>
+        <section class="w-full">
+            <div class="py-[70px] px-6 lg:px-20">
+                <h2 class="text-4xl text-center font-bold text-primary relative mb-6">
+                    {{ 'Powerful Features to Elevate Your Planning' |trans|raw }}
+                </h2>
+                <div  
+                    class="grid grid-cols-2 gap-6 p-6 mx-auto place-items-center"
+                >
+                    {% set items = [
+                        { icon: 'fa-list-check', text: 'To-Do Lists – Plan your day, week, and month efficiently.' },
+                        { icon: 'fa-cart-shopping', text: 'Shopping Lists – Keep track of everything you need at the store.' },
+                        { icon: 'fa-earth-americas', text: 'Travel Lists – Prepare for trips without the chaos.' },
+                        { icon: 'fa-bullseye', text: 'Dream Lists – Capture your goals and steps to achieve them.' },
+                        { icon: 'fa-calendar-check', text: 'Event Lists – Stay on top of celebrations and meetings.' },
+                        { icon: 'fa-gift', text: 'Gift Lists – Remember what to give and what you’d love to receive.' }
+                    ] %}
+                    {% for item in items %}
+                        <div 
+                            class="fade-in-row flex flex-col items-center justify-center p-4 rounded-xl shadow-md opacity-0"
+                        >
+                            <i class="text-3xl text-blue-500 mb-2 fas {{ item.icon }}"></i>
+                            <p class="text-lg font-medium text-primary text-center">{{ item.text }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </section>
+
+        <section class="w-full">
+            <div class="py-[70px] px-6 lg:px-20">
+                <h2 class="text-4xl text-center font-bold text-primary relative">
+                    {{ 'Why TickTick?' |trans|raw }}
+                </h2>
+            </div>
+        </section>
+
+        <section>
+
+        </section>
+
     </main>
 {% endblock %}

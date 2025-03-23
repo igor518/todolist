@@ -7,3 +7,22 @@
 import './styles/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+
+
+/* document.addEventListener("DOMContentLoaded", function () {
+    const fadeInRows = document.querySelectorAll(".fade-in-row");
+
+    function checkVisibility() {
+        fadeInRows.forEach((row) => {
+            const rect = row.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.85) {
+                row.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", checkVisibility);
+    checkVisibility();
+});*/
+
+
