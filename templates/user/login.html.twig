@@ -10,14 +10,10 @@
     </style>                       
 
 {% endblock %}
-{% block title %}{{'Log in!'|trans|raw }}{% endblock %}
+{% block title %} {{ 'Log in!'|trans|raw }}{% endblock %}
 {% block body %}
-<main
-    class="py-6 login__page"
->
-    <div 
-        class="max-w-2xl mx-auto bg-light p-8 rounded-xl shadow-lg flex flex-col my-9"
-    >
+<main class="py-6 login__page">
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg flex flex-col my-9">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 class="text-3xl font-bold text-center text-primary mb-6 uppercase">Sign in to your account</h2>
         </div>
@@ -94,7 +90,6 @@
                 </p> 
             </div>
         </div>
-
     </div>
 </main>
 {% endblock %}

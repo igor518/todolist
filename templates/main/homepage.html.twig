@@ -25,6 +25,9 @@
 {% endblock %}
 {% block body %}
     <main>
+    <div {{ react_component('Hello', { fullName: 'Fabien' }) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
         <section 
             class="w-full px-6 lg:px-20 py-24 relative flex items-center"
             style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;"
