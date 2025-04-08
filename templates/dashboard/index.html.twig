@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block body %}
+    <div {{ react_component('Dashboard', {id: user_id}) }}>
+        <div id="root"></div>
+    </div>
+{% endblock %}
