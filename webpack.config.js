@@ -7,14 +7,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
-    // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
-    // public path used by the web server to access the output path
-    .setPublicPath('/build')
-    // only needed for CDN's or subdirectory deploy
-    //.setManifestKeyPrefix('build/')
-    .enableVersioning()
-
+    .enableReactPreset()
     /*
      * ENTRY CONFIG
      *
@@ -22,12 +15,17 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addEntry('app', './assets/styles/app.css')
+    .addEntry('appcss', './assets/styles/app.css')
+    // directory where compiled assets will be stored
+    .setOutputPath('public/build/')
+    // public path used by the web server to access the output path
+    .setPublicPath('/build')
+    // only needed for CDN's or subdirectory deploy
+    //.setManifestKeyPrefix('build/')
+
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
-
-    .enableReactPreset()
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -44,12 +42,13 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .cleanupOutputBeforeBuild()
+    .enableVersioning()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
+    //.enableVersioning(Encore.isProduction())
 
-    // configure Babel
+    // // configure Babel
     // .configureBabel((config) => {
     //     config.plugins.push('@babel/a-babel-plugin');
     // })
