@@ -24,6 +24,8 @@ security:
             form_login:
                 login_path: user_login
                 check_path: user_login
+                default_target_path: app_dashboard
+                always_use_default_target_path: true
                 enable_csrf: true
 
             # activate different ways to authenticate

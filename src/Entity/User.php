@@ -68,9 +68,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'user_id')]
     private Collection $tasks;
 
+    /**
+     * @var Collection<int, TaskListUser>
+     */
+    #[ORM\OneToMany(targetEntity: TaskListUser::class, mappedBy: 'user')]
+    private Collection $taskLists;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->taskLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -256,6 +263,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($task->getUserId() === $this) {
                 $task->setUserId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TaskListUser>
+     */
+    public function getTaskLists(): Collection
+    {
+        return $this->taskLists;
+    }
+
+    public function addTaskList(TaskListUser $taskList): static
+    {
+        if (!$this->taskLists->contains($taskList)) {
+            $this->taskLists->add($taskList);
+            $taskList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTaskList(TaskListUser $taskList): static
+    {
+        if ($this->taskLists->removeElement($taskList)) {
+            // set the owning side to null (unless already changed)
+            if ($taskList->getUser() === $this) {
+                $taskList->setUser(null);
             }
         }
 

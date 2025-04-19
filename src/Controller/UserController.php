@@ -17,6 +17,8 @@ class UserController extends AbstractController
     #[Route('/login', name: 'user_login')]
     public function login(): Response
     {
+        var_dump("AAAA");
+        exit;
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         return $this->render('user/login.html.twig', ['form' => $form]);
@@ -47,7 +49,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+            $existingUser = $entityManager
+                ->getRepository(User::class)
+                ->findOneBy(['email' => $user->getEmail()]);
             if ($existingUser) {
                 $this->addFlash('error', 'This email is already registered.');
                 return $this->redirectToRoute('user_register');
@@ -57,6 +61,8 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $security->login($user, 'form_login');
+            var_dump("AAAA");
+            exit;
             return $this->redirectToRoute('app_dashboard');
         }
         return $this->render('user/registration.html.twig', ['form' => $form]);
