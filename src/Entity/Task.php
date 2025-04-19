@@ -34,6 +34,18 @@ class Task
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     private ?User $user_id = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?TaskList $task_list = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $progress = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $due_date = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $assigned_user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,6 +119,54 @@ class Task
     public function setUserId(?User $user_id): static
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getTaskList(): ?TaskList
+    {
+        return $this->task_list;
+    }
+
+    public function setTaskList(?TaskList $task_list): static
+    {
+        $this->task_list = $task_list;
+
+        return $this;
+    }
+
+    public function getProgress(): ?int
+    {
+        return $this->progress;
+    }
+
+    public function setProgress(int $progress): static
+    {
+        $this->progress = $progress;
+
+        return $this;
+    }
+
+    public function getDueDate(): ?\DateTimeInterface
+    {
+        return $this->due_date;
+    }
+
+    public function setDueDate(\DateTimeInterface $due_date): static
+    {
+        $this->due_date = $due_date;
+
+        return $this;
+    }
+
+    public function getAssignedUser(): ?User
+    {
+        return $this->assigned_user;
+    }
+
+    public function setAssignedUser(?User $assigned_user): static
+    {
+        $this->assigned_user = $assigned_user;
 
         return $this;
     }

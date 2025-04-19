@@ -8,8 +8,8 @@ import { useQuery, gql } from '@apollo/client';
  */
 
 const GET_USER = gql`
-    query getUser {
-        user(id:"/api/users/6") {
+    query getUser ($id: ID!) {
+        user(id: $id) {
             id
             firstname
             lastname
@@ -18,8 +18,18 @@ const GET_USER = gql`
     }
 `;
 
-function DisplayUser() {
-    const { loading, error, data } = useQuery(GET_USER);
+/**
+ * Get user data from
+ * server
+ *
+ * @param user
+ * @returns {Element}
+ * @constructor
+ */
+function DisplayUser(user) {
+        const { loading, error, data } = useQuery(GET_USER,{
+        variables: { id: `/api/users/${user.userId}` },
+    });
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message}</p>;
     return (
@@ -32,11 +42,10 @@ function DisplayUser() {
     );
 }
 
-export default function UserRequest(userId) {
-    console.dir(userId);
+export default function UserRequest({userId}) {
     return (
         <div>
-            <DisplayUser/>
+            <DisplayUser userId={userId} />
         </div>
     );
 }
