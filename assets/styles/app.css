@@ -1,4 +1,18 @@
-@import "tailwindcss";
+@import "tailwindcss" prefix(tw);
+
+@theme {
+    --color-primary: #1A237E;
+    --color-secondary: #03A9F4;
+    --color-dark: #0F172A;
+    --color-light: #F8FAFC;
+    --color-text-main: #1E293B;
+    --color-text-gray: #64748B;
+}
+
+:root {
+    font-family: sans-serif;
+  
+}
 
 html, body {
     background-color: #fff;
