@@ -18,15 +18,15 @@
 {% endblock %}
 {% block body %}
 
-{% set input_classes = 'tw:block tw:rounded-t-lg tw:px-2.5 tw:pb-2.5 tw:pt-5 tw:w-full tw:text-sm tw:text-gray-900 tw:bg-gray-50 tw:border-0 tw:border-b-2 tw:border-gray-300 tw:appearance-none tw:focus:outline-none tw:focus:ring-0 tw:focus:border-blue-600 tw:peer' %}
-{% set label_classes = 'tw:absolute tw:text-sm tw:text-gray-500 tw:duration-300 tw:transform tw:-translate-y-4 tw:scale-75 tw:top-4 tw:z-10 tw:origin-[0] tw:start-2.5 tw:peer-focus:text-secondary tw:peer-placeholder-shown:scale-100 tw:peer-placeholder-shown:translate-y-0 tw:peer-focus:scale-75 tw:peer-focus:-translate-y-4 tw:rtl:peer-focus:translate-x-1/4 tw:rtl:peer-focus:left-auto' %}
+{% set input_classes = 'tw:block tw:rounded-t-lg tw:px-2.5 tw:pb-2.5 tw:pt-5 tw:w-full tw:text-sm tw:font-text tw:font-normal tw:text-gray-900 tw:bg-gray-50 tw:border-0 tw:border-b-2 tw:border-gray-300 tw:appearance-none tw:focus:outline-none tw:focus:ring-0 tw:focus:border-blue-600 tw:peer' %}
+{% set label_classes = 'tw:absolute tw:text-sm tw:font-text tw:font-medium tw:text-gray-500 tw:duration-300 tw:transform tw:-translate-y-4 tw:scale-75 tw:top-4 tw:z-10 tw:origin-[0] tw:start-2.5 tw:peer-focus:text-secondary tw:peer-placeholder-shown:scale-100 tw:peer-placeholder-shown:translate-y-0 tw:peer-focus:scale-75 tw:peer-focus:-translate-y-4 tw:rtl:peer-focus:translate-x-1/4 tw:rtl:peer-focus:left-auto' %}
 
 <main 
     class="tw:py-6 register__page"
 >
 
     <div class="tw:max-w-2xl tw:mx-auto tw:bg-slate-50 tw:p-8 tw:rounded-xl tw:shadow-lg">
-        <h2 class="tw:text-3xl tw:font-bold tw:text-center tw:text-[#1A237E] tw:mb-6 tw:uppercase">{{ 'Registration' |trans|raw }}</h2>
+        <h2 class="tw:text-3xl tw:font-display tw:font-bold tw:text-center tw:text-[#1A237E] tw:mb-6 tw:uppercase">{{ 'Registration' |trans|raw }}</h2>
 
         {% for message in app.flashes('error') %}
             <div class="tw:rounded-lg tw:bg-red-100 tw:border tw:border-red-400 tw:text-red-700 tw:px-4 tw:py-3 tw:relative tw:flex tw:items-center tw:space-x-2" role="alert">
@@ -159,7 +159,7 @@
                     </label>
                 </div>
 
-                <div class="tw:mt-6 tw:flex tw:justify-center tw:space-x-6">
+                <div class="tw:mt-6 tw:flex tw:justify-center tw:space-x-6 tw:font-display tw:font-semibold">
                     {{ form_widget(form.save, {'label': 'Register', 'attr': {
                         'class': 'tw:relative tw:inline-block tw:text-white border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]'}}) 
                     }}

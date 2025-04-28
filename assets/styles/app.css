@@ -1,3 +1,5 @@
+
+@import url(https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap);
 @import "tailwindcss" prefix(tw);
 
 @theme {
@@ -7,11 +9,12 @@
     --color-light: #F8FAFC;
     --color-text-main: #1E293B;
     --color-text-gray: #64748B;
+    --font-display: "Nunito", sans-serif;
+    --font-text: "Inter", sans-serif;
 }
 
 :root {
-    font-family: sans-serif;
-  
+    font-family: "Inter", sans-serif;
 }
 
 html, body {
