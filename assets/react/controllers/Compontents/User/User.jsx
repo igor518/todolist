@@ -1,13 +1,12 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
-
+import './index.css';
 
 /**
  * Retrieves user data
  *
  * @type {DocumentNode}
  */
-
 const GET_USER = gql`
     query getUser ($id: ID!) {
         user(id: $id) {
@@ -19,6 +18,7 @@ const GET_USER = gql`
     }
 `;
 
+
 /**
  * Get user data from
  * server
@@ -28,25 +28,27 @@ const GET_USER = gql`
  * @constructor
  */
 function DisplayUser(user) {
-        const { loading, error, data } = useQuery(GET_USER,{
+    const { loading, error, data } = useQuery(GET_USER,{
         variables: { id: `/api/users/${user.userId}` },
     });
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message}</p>;
     return (
-        <div key={data.user.id}>
-            <h2>{data.user.firstname}</h2>
-            <h2>{data.user.lastname}</h2>
-            <h2>{data.user.email}</h2>
-            <br/>
+        <div className="@container" key={data.user.id}>
+            <div className="grid grid-cols-1 @sm:grid-cols-2">
+                <ul>
+                    <li>{data.user.firstname}</li>
+                    <li>{data.user.lastname}</li>
+                    <li>{data.user.email}</li>
+                </ul>
+            </div>
         </div>
     );
 }
-
 export default function UserRequest({userId}) {
     return (
         <div>
-            <DisplayUser userId={userId} />
+            <DisplayUser userId={userId}/>
         </div>
     );
 }

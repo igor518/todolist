@@ -21,6 +21,14 @@
                 </span>
             </a>
         </div>
+    {% else %}
+        <a href="{{ path('app_dashboard') }}"
+           class="relative inline-block"
+        >
+            <span class="relative z-10">
+                {{ 'Dashboard'|trans|raw }}
+            </span>
+        </a>
     {% endif %}
 {% endblock %}
 {% block body %}
