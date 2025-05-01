@@ -1,16 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GraphQl\QueryCollection;
 use App\Repository\TaskListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\GraphQl\Mutation;
+use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\GraphQl\DeleteMutation;
 
 #[ORM\Entity(repositoryClass: TaskListRepository::class)]
-#[ApiResource]
+#[ApiResource(graphQlOperations: [
+    new Query(),
+    new QueryCollection(),
+    new Mutation(name: 'create'),
+    new Mutation(name: 'update'),
+    new DeleteMutation(name: 'delete')
+])]
 class TaskList
 {
     #[ORM\Id]
@@ -26,7 +38,7 @@ class TaskList
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $owner_id = null;
+    private ?User $owner = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -42,7 +54,6 @@ class TaskList
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->taskListUsers = new ArrayCollection();
     }
 
@@ -75,15 +86,14 @@ class TaskList
         return $this;
     }
 
-    public function getOwnerId(): ?User
+    public function getOwner(): ?User
     {
-        return $this->owner_id;
+        return $this->owner;
     }
 
-    public function setOwnerId(User $owner_id): static
+    public function setOwner(User $owner): static
     {
-        $this->owner_id = $owner_id;
-
+        $this->owner = $owner;
         return $this;
     }
 
@@ -95,7 +105,6 @@ class TaskList
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 
@@ -107,7 +116,6 @@ class TaskList
     public function setUpdatedAt(\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
-
         return $this;
     }
 
@@ -137,7 +145,6 @@ class TaskList
                 $taskListUser->setTaskList(null);
             }
         }
-
         return $this;
     }
 }
