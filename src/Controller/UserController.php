@@ -59,8 +59,6 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $security->login($user, 'form_login');
-            var_dump("AAAA");
-            exit;
             return $this->redirectToRoute('app_dashboard');
         }
         return $this->render('user/registration.html.twig', ['form' => $form]);
