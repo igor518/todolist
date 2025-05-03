@@ -17,8 +17,6 @@ class UserController extends AbstractController
     #[Route('/login', name: 'user_login')]
     public function login(): Response
     {
-        var_dump("AAAA");
-        exit;
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         return $this->render('user/login.html.twig', ['form' => $form]);
