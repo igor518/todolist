@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
-import UserRequest from "./Compontents/User/User";
 import Button from "./Compontents/Button/Button";
-import TaskList from "./Compontents/TaskList/TaskList";
-import {useQuery, gql, ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import TaskListContainer from "./Compontents/TaskListContainer/TaskListContainer";
+import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListFormContainer";
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import User from "./User";
 
 const client = new ApolloClient({
     uri: 'https://todolist.dev/api/graphql',
@@ -17,19 +18,20 @@ const client = new ApolloClient({
  * @returns {Element}
  * @constructor
  */
-export default function Dashboard({id}) {
+export default function ({id}) {
     const [content, setContent] = useState('');
 
     const addNewTaskList = () => {
         setContent('task_list');
     }
-    return(
+    return (
         <>
             <ApolloProvider client={client}>
-                <UserRequest userId={id}/>
+                <User userId={id}/>
+                <TaskListContainer />
                 <Button onClick={addNewTaskList}>Create a new Task List</Button>
                 {
-                    content === 'task_list' && <TaskList userId={id} />
+                    content === 'task_list' && <TaskListFormContainer userId={id} />
                 }
             </ApolloProvider>
         </>

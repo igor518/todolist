@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
 
-
 /**
  * Retrieves user data
  *
@@ -43,7 +42,7 @@ function DisplayUser(user) {
     );
 }
 
-export default function UserRequest({userId}) {
+export default function User({userId}) {
     return (
         <div>
             <DisplayUser userId={userId} />
