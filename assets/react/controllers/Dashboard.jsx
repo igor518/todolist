@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import Button from "./Compontents/Button/Button";
-import TaskListContainer from "./Compontents/TaskListContainer/TaskListContainer";
-import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListFormContainer";
+import Button from "./Compontents/Button";
+import TaskListContainer from "./Compontents/TaskListContainer";
+import TaskListFormContainer from "./Compontents/TaskListFormContainer";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import User from "./User";
 
