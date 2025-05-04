@@ -1,5 +1,5 @@
 import { useMutation, gql } from '@apollo/client';
-import TaskListForm from '../TaskListForm';
+import TaskListForm from '../TaskListForm/TaskListForm';
 
 // GraphQL Mutation
 const CREATE_TASKLIST = gql`

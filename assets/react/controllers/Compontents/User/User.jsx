@@ -27,9 +27,9 @@ const GET_USER = gql`
  * @returns {Element}
  * @constructor
  */
-function DisplayUser(user) {
+function DisplayUser({ userId }) {
     const { loading, error, data } = useQuery(GET_USER,{
-        variables: { id: `/api/users/${user.userId}` },
+        variables: { id: `/api/users/${userId}` },
     });
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message}</p>;
