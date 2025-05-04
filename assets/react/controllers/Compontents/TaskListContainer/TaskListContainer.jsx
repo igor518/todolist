@@ -1,5 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
-import TaskList from '../TaskList/TaskList';
+import TaskList from '../TaskList';
 
 // Define your GraphQL query to fetch task lists
 const GET_TASK_LISTS = gql`
