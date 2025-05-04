@@ -1,0 +1,14 @@
+api_platform:
+    title: Hello API Platform
+    version: 1.0.0
+    formats:
+        graphql: ['application/graphql']
+    graphql:
+        default_ide: graphql-playground
+        introspection: true
+        graphiql:
+            enabled: false
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']

@@ -47,7 +47,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
+            $existingUser = $entityManager
+                ->getRepository(User::class)
+                ->findOneBy(['email' => $user->getEmail()]);
             if ($existingUser) {
                 $this->addFlash('error', 'This email is already registered.');
                 return $this->redirectToRoute('user_register');
@@ -56,8 +58,8 @@ class UserController extends AbstractController
             $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
-            $security->login($user);
-            return $this->redirectToRoute('main_index');
+            $security->login($user, 'form_login');
+            return $this->redirectToRoute('app_dashboard');
         }
         return $this->render('user/registration.html.twig', ['form' => $form]);
     }

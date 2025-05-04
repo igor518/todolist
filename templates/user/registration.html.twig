@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
     <style>
         form {
             display: flex;
@@ -16,157 +17,167 @@
 
 {% endblock %}
 {% block body %}
+
+{% set input_classes = 'tw:block tw:rounded-t-lg tw:px-2.5 tw:pb-2.5 tw:pt-5 tw:w-full tw:text-sm tw:font-text tw:font-normal tw:text-gray-900 tw:bg-gray-50 tw:border-0 tw:border-b-2 tw:border-gray-300 tw:appearance-none tw:focus:outline-none tw:focus:ring-0 tw:focus:border-blue-600 tw:peer' %}
+{% set label_classes = 'tw:absolute tw:text-sm tw:font-text tw:font-medium tw:text-gray-500 tw:duration-300 tw:transform tw:-translate-y-4 tw:scale-75 tw:top-4 tw:z-10 tw:origin-[0] tw:start-2.5 tw:peer-focus:text-secondary tw:peer-placeholder-shown:scale-100 tw:peer-placeholder-shown:translate-y-0 tw:peer-focus:scale-75 tw:peer-focus:-translate-y-4 tw:rtl:peer-focus:translate-x-1/4 tw:rtl:peer-focus:left-auto' %}
+
 <main 
-    class="py-6 register__page"
+    class="tw:py-6 register__page"
 >
 
-    <div class="max-w-2xl mx-auto bg-light p-8 rounded-xl shadow-lg">
-        <h2 class="text-3xl font-bold text-center text-primary mb-6 uppercase">{{ 'Registration' |trans|raw }}</h2>
+    <div class="tw:max-w-2xl tw:mx-auto tw:bg-slate-50 tw:p-8 tw:rounded-xl tw:shadow-lg">
+        <h2 class="tw:text-3xl tw:font-display tw:font-bold tw:text-center tw:text-[#1A237E] tw:mb-6 tw:uppercase">{{ 'Registration' |trans|raw }}</h2>
 
         {% for message in app.flashes('error') %}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">{{ message }}</div>
+            <div class="tw:rounded-lg tw:bg-red-100 tw:border tw:border-red-400 tw:text-red-700 tw:px-4 tw:py-3 tw:relative tw:flex tw:items-center tw:space-x-2" role="alert">
+                <svg class="tw:w-5 tw:h-5 tw:text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10c0 4.418-3.582 8-8 8s-8-3.582-8-8 3.582-8 8-8 8 3.582 8 8zm-9 4h2v-2H9v2zm0-4h2V6H9v4z" clip-rule="evenodd" />
+                </svg>
+                <span>
+                    {{ message }}
+                </span>
+            </div>
         {% endfor %}
 
         {{ form_start(form) }}
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="relative">
+                <div class="tw:grid tw:grid-cols-2 tw:gap-4">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.firstname, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': '',
+                                    'class': input_classes,
+                                    'placeholder': ' ',
                                     'autofocus':'autofocus'
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'First Name' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'First Name' |trans|raw }}</label>
                     </div>
-                    <div class="relative">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.lastname, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Last Name' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'Last Name' |trans|raw }}</label>
                     </div>
                 </div>
-                <div class="grid gap-4">
-                    <div class="relative">
+                <div class="tw:grid tw:gap-4">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.email, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Email' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'Email' |trans|raw }}</label>
                     </div>
-                    <div class="relative">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.phone, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Phone' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'Phone' |trans|raw }}</label>
                         
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="relative">
+                <div class="tw:grid tw:grid-cols-2 tw:gap-4">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.country, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Country' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'Country' |trans|raw }}</label>
                     </div>
-                    <div class="relative">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.city, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'City' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'City' |trans|raw }}</label>
                     </div>
-                    <div class="relative">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.street, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Street' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'Street' |trans|raw }}</label>
                     </div>
-                    <div class="relative">
+                    <div class="tw:relative">
                         {{
                             form_widget(form.postcode, {
                                 'attr': {
-                                    'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                    'placeholder': ''
+                                    'class': input_classes,
+                                    'placeholder': ' '
                                 }
                             })
                         }}
-                        <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Postcode' |trans|raw }}</label>
+                        <label class="{{ label_classes }}">{{ 'Postcode' |trans|raw }}</label>
 
                     </div>
                 </div>
 
-                <div class="relative">
+                <div class="tw:relative">
                     {{
                         form_widget(form.password, {
                             'attr': {
-                                'class': 'block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50  border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer',
-                                'placeholder': '',
+                                'class': input_classes,
+                                'placeholder': ' ',
                                 'aria-label': 'Password'
                             }
                         })
                     }}
-                    <label class="absolute text-sm text-gray-500  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-secondary  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{ 'Password' |trans|raw }}</label>
+                    <label class="{{ label_classes }}">{{ 'Password' |trans|raw }}</label>
                 </div>
-                <div class="mt-4">
-                    <label class="inline-flex items-center">
-                        <span class="ml-2 text-sm text-gray-600">
+                <div class="tw:mt-4">
+                    <label class="tw:inline-flex tw:items-center">
+                        <span class="tw:ml-2 tw:text-sm tw:text-gray-600">
                             {{ 'I agree to the' |trans }} 
-                            <a href="/" class="text-secondary hover:underline">{{ 'privacy policy' |trans }}</a>
+                            <a href="/" class="tw:text-secondary tw:hover:underline">{{ 'privacy policy' |trans }}</a>
                         </span>
                     </label>
                 </div>
 
-                <div class="mt-6 flex justify-center space-x-6">
+                <div class="tw:mt-6 tw:flex tw:justify-center tw:space-x-6 tw:font-display tw:font-semibold">
                     {{ form_widget(form.save, {'label': 'Register', 'attr': {
-                        'class': 'relative inline-block text-white border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-gradient-to-r from-[#1A237E] to-[#03A9F4] hover:from-[#3949AB] hover:to-[#29B6F6]'}}) 
+                        'class': 'tw:relative tw:inline-block tw:text-white border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]'}}) 
                     }}
                     <a 
                         href="{{ path('main_index') }}" 
-                        class="relative inline-block text-black border border-gray-400 rounded-[10px] px-5 py-3 text-lg font-semibold uppercase tracking-wide transition-all duration-300 bg-white hover:bg-black hover:text-white"
+                        class="tw:relative tw:inline-block tw:text-black tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 tw:bg-white tw:hover:bg-black tw:hover:text-white"
                     >
                         {{ 'Cancel' }}
                     </a>
                 </div>    
-                <div class="flex mx-auto items-center">
-                    <p class="text-sm text-gray-600 text-center">
+                <div class="tw:flex tw:mx-auto tw:items-center">
+                    <p class="tw:text-sm tw:text-gray-600 tw:text-center">
                         {{ 'Already have an account?' |trans }} 
-                        <a href="{{ path('user_login') }}" class="text-secondary hover:underline">{{ 'Login here' |trans }}</a>
+                        <a href="{{ path('user_login') }}" class="tw:text-secondary tw:hover:underline">{{ 'Login here' |trans }}</a>
                     </p>
                 </div>           
             
         {{ form_end(form) }}
-        
     </div>
 </main>
 {% endblock %}

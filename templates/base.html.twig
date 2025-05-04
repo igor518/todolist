@@ -3,28 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/png" href="{{ asset('images/favicon.svg') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
-        <header class="block px-6">
-            <nav class="relative flex items-center justify-between">
-                <a href="/" class="flex items-center h-24 py-2">
+        <header class="tw:block tw:px-6">
+            <nav class="tw:relative tw:flex tw:items-center tw:justify-between">
+                <a href="/" class="tw:flex tw:items-center tw:h-24 tw:py-2">
                     <img src="{{ asset('images/logo.svg') }}" alt="TickTick" class="h-auto">
                 </a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <p>{{ 'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }} !</p>
-                    <form action="{{ path('app_logout') }}" method="post">
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                        <button type="submit">{{ 'Logout'|trans|raw }}</button>
-                    </form>
-                {% endif %}
-                {% block header %}{% endblock %}
+                <div class="tw:flex tw:items-center tw:gap-4">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <p class="tw:text-sm tw:font-medium">{{ 'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }} !</p>
+                        <form action="{{ path('app_logout') }}" method="post" class="tw:inline">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                            <button type="submit">
+                            {{ 'Logout'|trans|raw }}
+                            </button>
+                        </form>
+                    {% endif %}
+                    {% block header %}{% endblock %}
+                </div>
             </nav>
         </header>
         {% block body %}{% endblock %}
