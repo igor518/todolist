@@ -6,19 +6,21 @@ import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListF
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import User from "./Compontents/User/User";
 
-const client = new ApolloClient({
-    uri: 'https://todolist.dev/api/graphql',
-    cache: new InMemoryCache(),
-});
-
 /**
  * TodoList dashboard
  *
  * @param id
+ * @param host
  * @returns {Element}
  * @constructor
  */
-export default function ({id}) {
+export default function ({id, host}) {
+
+    const client = new ApolloClient({
+        uri: "https://"+ host + "/api/graphql",
+        cache: new InMemoryCache(),
+    });
+
     const [content, setContent] = useState('');
 
     const addNewTaskList = () => {
@@ -27,7 +29,7 @@ export default function ({id}) {
     return (
         <>
             <ApolloProvider client={client}>
-                <User userId={id}/>
+                <User userId={id} />
                 <TaskListContainer userId={id} />
                 <Button onClick={addNewTaskList}>Create a new Task List</Button>
                 {
