@@ -21,14 +21,6 @@
                 </span>
             </a>
         </div>
-    {% else %}
-        <a href="{{ path('app_dashboard') }}"
-           class="relative inline-block"
-        >
-            <span class="relative z-10">
-                {{ 'Dashboard'|trans|raw }}
-            </span>
-        </a>
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -36,26 +28,54 @@
         <section 
             class="tw:w-full tw:px-6 tw:lg:px-20 tw:py-24 tw:relative tw:flex tw:items-center"
             style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;"
-            >
+        >
             <div class="tw:max-w-5xl">
-                <h1 class="tw:text-5xl tw:tracking-wide tw:text-[#1A237E] tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold">
-                    Organize Your Tasks, <br> Boost Your Productivity
-                </h1>
-                <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold">
-                    Dream. Plan. Achieve! &#x1F680;
-                </p>
-                <p class="tw:mt-4 tw:text-2xl tw:text-white text-left">
-                    Set your plans for the day, week, or month. <br> Write down your goals, create to-do and dream lists, and take steps toward greatness. <br> Track your progress and accomplish more!
-                </p>
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <h1 class="tw:text-5xl tw:tracking-wide tw:text-[#1A237E] tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold">
+                        Organize Your Tasks, <br> Boost Your Productivity
+                    </h1>
+                    <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold">
+                        Dream. Plan. Achieve! 🚀
+                    </p>
+                    <p class="tw:mt-4 tw:text-2xl tw:text-white text-left">
+                        Set your plans for the day, week, or month. <br>
+                        Write down your goals, create to-do and dream lists, and take steps toward greatness. <br>
+                        Track your progress and accomplish more!
+                    </p>
+                {% else %}
+                    <h1 class="tw:text-5xl tw:tracking-wide tw:text-[#1A237E] tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold">
+                        Welcome back, {{ app.user.firstname }}! 🙌
+                    </h1>
+                    <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold">
+                        Your tasks are waiting. Let's get things done. ✅
+                    </p>
+                    <p class="tw:mt-4 tw:text-2xl tw:text-white text-left">
+                        Head to your dashboard to check your current tasks, <br> 
+                        refresh your personal goals, reflect on your achievements, review your progress, <br>
+                        and confidently keep moving forward on the path to focus,<br>
+                        effectiveness, and a sense of balance.
+                    </p>
+                {% endif %}
                 <div class="tw:mt-8 tw:flex tw:space-x-6 tw:font-display tw:font-semibold">
-                    <a 
-                        href="{{ path('user_register') }}" 
-                        class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
-                        tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
-                        tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]"
-                    >
-                        {{ 'Get started'|trans|raw }}
-                    </a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a 
+                            href="{{ path('app_dashboard') }}" 
+                            class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
+                            tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
+                            tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]"
+                        >
+                            {{ 'Dashboard'|trans|raw }}
+                        </a>
+                    {% else %}
+                        <a 
+                            href="{{ path('user_register') }}" 
+                            class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
+                            tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
+                            tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]"
+                        >
+                            {{ 'Get started'|trans|raw }}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </section>
