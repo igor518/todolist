@@ -5,7 +5,7 @@
 {% block body %}
     <section>
         <h1>{{ 'Your tasks' | trans }} </h1>
-        <div {{ react_component('Dashboard', {id: user_id}) }}>
+        <div {{ react_component('Dashboard', {id: user_id, host: app.request.getHttpHost}) }}>
             <div id="root"></div>
         </div>
     </section>

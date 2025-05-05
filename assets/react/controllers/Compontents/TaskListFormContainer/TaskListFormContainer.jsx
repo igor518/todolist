@@ -1,36 +1,6 @@
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import TaskListForm from '../TaskListForm/TaskListForm';
-
-// GraphQL Mutation
-const CREATE_TASKLIST = gql`
-  mutation createTaskList($input: createTaskListInput!) {
-    createTaskList(input: $input) {
-      taskList {
-        id
-        name
-        description
-        created_at
-        updated_at
-      }
-    }
-  }
-`;
-
-// Define your GraphQL query to fetch task lists
-const GET_TASK_LISTS = gql`
-  query GetTaskLists ($first: Int!) {
-    taskLists(first:$first) {
-      edges {
-        node {
-          id
-          name
-          description
-        }
-      }
-    }
-  }
-`;
-
+import {GET_TASK_LISTS, CREATE_TASKLIST } from '../graphql_query'
 function TaskListFormContainer({ userId }) {
     const [createTaskList, { loading, error }] = useMutation(CREATE_TASKLIST);
 
@@ -48,7 +18,15 @@ function TaskListFormContainer({ userId }) {
                         updated_at: new Date().toISOString(),
                     },
                 },
-                refetchQueries: [{ query: GET_TASK_LISTS, variables: { first: 10 }}],
+                refetchQueries: [
+                    {
+                        query: GET_TASK_LISTS,
+                        variables: {
+                            first: 10,
+                            owner: "api/users/" + userId
+                        }
+                    }
+                ],
             });
         } catch (err) {
             console.error('GraphQL Error:', err.graphQLErrors);

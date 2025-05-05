@@ -10,10 +10,12 @@ use App\Repository\TaskListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\ApiFilter;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\GraphQl\Mutation;
 use ApiPlatform\Metadata\GraphQl\Query;
 use ApiPlatform\Metadata\GraphQl\DeleteMutation;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: TaskListRepository::class)]
 #[ApiResource(graphQlOperations: [
@@ -23,6 +25,7 @@ use ApiPlatform\Metadata\GraphQl\DeleteMutation;
     new Mutation(name: 'update'),
     new DeleteMutation(name: 'delete')
 ])]
+#[ApiFilter(SearchFilter::class, properties: ['owner' => 'exact'])]
 class TaskList
 {
     #[ORM\Id]
