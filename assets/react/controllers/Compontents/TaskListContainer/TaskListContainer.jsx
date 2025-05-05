@@ -1,24 +1,14 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import TaskList from '../TaskList/TaskList';
+import { GET_TASK_LISTS } from '../graphql_query'
 
-// Define your GraphQL query to fetch task lists
-const GET_TASK_LISTS = gql`
-  query GetTaskLists ($first: Int!) {
-    taskLists(first:$first) {
-      edges {
-        node {
-          id
-          name
-          description
-        }
-      }
-    }
-  }
-`;
-
-function TaskListContainer() {
+function TaskListContainer({userId}) {
     const { data, loading, error } = useQuery(GET_TASK_LISTS, {
-        variables: { first: 10 }});
+        variables: {
+            first: 10,
+            owner: "api/users/" + userId
+        }
+    });
     return (
         <TaskList
             taskLists={data?.taskLists?.edges || []}

@@ -4,7 +4,7 @@ import Button from "./Compontents/Button/Button";
 import TaskListContainer from "./Compontents/TaskListContainer/TaskListContainer";
 import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListFormContainer";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
-import User from "./User";
+import User from "./Compontents/User/User";
 
 const client = new ApolloClient({
     uri: 'https://todolist.dev/api/graphql',
@@ -28,7 +28,7 @@ export default function ({id}) {
         <>
             <ApolloProvider client={client}>
                 <User userId={id}/>
-                <TaskListContainer />
+                <TaskListContainer userId={id} />
                 <Button onClick={addNewTaskList}>Create a new Task List</Button>
                 {
                     content === 'task_list' && <TaskListFormContainer userId={id} />
