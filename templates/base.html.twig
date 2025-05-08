@@ -16,23 +16,60 @@
     <body>
         <header class="tw:block tw:px-6">
             <nav class="tw:relative tw:flex tw:items-center tw:justify-between">
-                <a href="/" class="tw:flex tw:items-center tw:h-24 tw:py-2">
-                    <img src="{{ asset('images/logo.svg') }}" alt="TickTick" class="h-auto">
+                <a href="{% if not is_granted('IS_AUTHENTICATED_FULLY') %}/{% else %}#{% endif %}" class="tw:flex tw:items-center tw:h-24 tw:py-2">
+                    <img src="{{ asset('images/logo.svg') }}" alt="DoTaskly" class="h-auto">
                 </a>
                 <div class="tw:flex tw:items-center tw:gap-4">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <p class="tw:text-sm tw:font-medium">{{ 'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }} !</p>
-                        <form action="{{ path('app_logout') }}" method="post" class="tw:inline">
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                            <button type="submit">
-                            {{ 'Logout'|trans|raw }}
-                            </button>
-                        </form>
+                    <div x-data="{ open: false }" class="tw:relative tw:inline-block tw:text-left">
+                        <button 
+                            x-ref="trigger"  
+                            @click="open = !open" 
+                            class="tw:flex tw:gap-4 tw:px-4 tw:py-2 tw:text-primary tw:font-display tw:text-lg tw:font-medium tw:rounded-[10px] tw:cursor-pointer tw:focus:outline-none"
+                        >
+                            {{'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }}
+                                <img 
+                                    :src="open ? '{{ asset('images/chevron-up.svg') }}' : '{{ asset('images/chevron-down.svg') }}'" 
+                                    alt="Chevron icon" 
+                                    class="tw:w-4 tw:h-4 tw:m-auto"
+                                >
+                        </button>
+
+                        <div 
+                            x-show="open"
+                            x-ref="dropdown"
+                            x-init="$nextTick(() => { $refs.dropdown.style.width = $refs.trigger.offsetWidth + 'px' })"
+                            @click.away="open = false" 
+                            class="tw:absolute tw:mt-1 tw:w-56 tw:rounded-[10px] tw:shadow-lg tw:bg-light tw:ring-opacity-5 tw:z-50 tw:flex tw:justify-center tw:items-center"
+                        >
+                            <div class="tw:py-1">
+                                {% if app.request.attributes.get('_route') != 'app_dashboard' %}
+                                    <a 
+                                        href="{{ path('app_dashboard') }}" 
+                                        class="tw:relative tw:inline-block tw:w-56 tw:text-center tw:rounded-[10px] tw:px-4 tw:py-3 tw:text-lg tw:font-text tw:text-primary tw:tracking-wide tw:transition tw:duration-300 tw:overflow-hidden tw:hover:text-white tw:before:absolute tw:before:inset-0 tw:before:bg-white tw:before:transition tw:before:duration-300 tw:before:z-0 tw:hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
+                                    >
+                                        <span class="tw:relative tw:z-10">{{ 'Dashboard'|trans|raw }}</span>
+                                    </a>
+                                {% endif %} 
+                            <form action="{{ path('app_logout') }}" method="post">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+                                <button 
+                                    type="submit"
+                                    class="tw:relative tw:inline-block  tw:w-56 tw:text-center tw:rounded-[10px] tw:px-4 tw:py-3 tw:text-lg tw:font-text tw:text-primary tw:tracking-wide tw:transition tw:duration-300 tw:overflow-hidden tw:hover:text-white tw:before:absolute tw:before:inset-0 tw:before:bg-white tw:before:transition tw:before:duration-300 tw:before:z-0 tw:hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)] tw:cursor-pointer"
+                                >
+                                    <span class="tw:relative tw:z-10">{{ 'Logout'|trans|raw }}</span>
+                                </button>
+                            </form>
+                            </div>
+                        </div>
+                        </div>
                     {% endif %}
                     {% block header %}{% endblock %}
                 </div>
             </nav>
         </header>
+
         {% block body %}{% endblock %}
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     </body>
 </html>
