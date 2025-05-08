@@ -25,7 +25,7 @@
                         <button 
                             x-ref="trigger"  
                             @click="open = !open" 
-                            class="tw:flex tw:gap-4 tw:px-4 tw:py-2 tw:text-primary tw:font-display tw:text-lg tw:font-medium tw:rounded-[10px] tw:cursor-pointer tw:focus:outline-none"
+                            class="tw:flex tw:gap-4 tw:min-[230px] tw:px-4 tw:py-2 tw:text-primary tw:font-display tw:text-lg tw:font-medium tw:rounded-[10px] tw:cursor-pointer tw:focus:outline-none"
                         >
                             {{'Hello,' |trans|raw }} {{ app.user.firstname }} {{ app.user.lastname }}
                                 <img 
@@ -40,7 +40,7 @@
                             x-ref="dropdown"
                             x-init="$nextTick(() => { $refs.dropdown.style.width = $refs.trigger.offsetWidth + 'px' })"
                             @click.away="open = false" 
-                            class="tw:absolute tw:mt-1 tw:w-56 tw:rounded-[10px] tw:shadow-lg tw:bg-light tw:ring-opacity-5 tw:z-50 tw:flex tw:justify-center tw:items-center"
+                            class="tw:absolute tw:mt-1 tw:w-[230px] tw:rounded-[10px] tw:shadow-lg tw:bg-light tw:ring-opacity-5 tw:z-50 tw:flex tw:justify-center tw:items-center"
                         >
                             <div class="tw:py-1">
                                 {% if app.request.attributes.get('_route') != 'app_dashboard' %}

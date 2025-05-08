@@ -4,8 +4,7 @@ import Button from "./Compontents/Button/Button";
 import TaskListContainer from "./Compontents/TaskListContainer/TaskListContainer";
 import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListFormContainer";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
-import User from "./Compontents/User/User";
-
+import User from './Compontents/User/User'
 /**
  * TodoList dashboard
  *
@@ -29,12 +28,22 @@ export default function ({id, host}) {
     return (
         <>
             <ApolloProvider client={client}>
-                <User userId={id} />
-                <TaskListContainer userId={id} />
-                <Button onClick={addNewTaskList}>Create a new Task List</Button>
-                {
-                    content === 'task_list' && <TaskListFormContainer userId={id} />
-                }
+                <div className='tw:flex'>
+                    <aside className="tw:fixed tw:flex tw:flex-col tw:top-[96px] tw:left-0 tw:h-[calc(100vh-96px)] tw:w-[360px] tw:bg-gradient-to-b tw:from-[#E3F2FD] tw:to-[#F8FAFC] tw:text-text-main tw:p-4 tw:shadow-lg">
+                        <div className="tw:mt-auto">
+                            <User userId={id} />
+                        </div>
+                    </aside> 
+                    <main className="tw:ml-[360px] tw:p-4">
+                        <TaskListContainer userId={id} />
+                        <Button onClick={addNewTaskList}>Create a new Task List</Button>
+                        {
+                            content === 'task_list' && <TaskListFormContainer userId={id} />
+                        }
+                    </main>
+
+                </div>
+                    
             </ApolloProvider>
         </>
     );

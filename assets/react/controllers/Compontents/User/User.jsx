@@ -1,5 +1,7 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+import { TailChase } from 'ldrs/react';
+import 'ldrs/react/TailChase.css';
 import './index.css';
 
 /**
@@ -31,14 +33,23 @@ function DisplayUser({ userId }) {
     const { loading, error, data } = useQuery(GET_USER,{
         variables: { id: `/api/users/${userId}` },
     });
-    if (loading) return <p>Loading...</p>;
+
+    if (loading) {
+        return (
+            <div className="tw:flex tw:min-[330px] tw:justify-center tw:gap-4 tw:border tw:border-primary tw:rounded-[10px] tw:p-4 tw:w-max tw:items-center">
+                <TailChase size="40" speed="1.75" color="#03A9F4" />
+            </div>
+        );
+    }
+
     if (error) return <p>Error : {error.message}</p>;
+
     return (
         <div className="@container" key={data.user.id}>
-            <div className="grid grid-cols-1 @sm:grid-cols-2">
+            <div className="tw:flex tw:w-[330px] tw:gap-2 tw:border tw:border-primary tw:rounded-[10px] tw:p-4">
+                <img src="/images/photo_icon.svg" alt="photo" className="tw:w-12 tw:h-12" />
                 <ul>
-                    <li>{data.user.firstname}</li>
-                    <li>{data.user.lastname}</li>
+                    <li>{`${data.user.firstname} ${data.user.lastname}`}</li>
                     <li>{data.user.email}</li>
                 </ul>
             </div>
