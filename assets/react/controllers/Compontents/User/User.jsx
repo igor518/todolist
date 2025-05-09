@@ -36,7 +36,7 @@ function DisplayUser({ userId }) {
 
     if (loading) {
         return (
-            <div className="tw:flex tw:min-[330px] tw:justify-center tw:gap-4 tw:border tw:border-primary tw:rounded-[10px] tw:p-4 tw:w-max tw:items-center">
+            <div className="tw:flex tw:w-[330px] tw:justify-center tw:gap-4 tw:border tw:border-primary tw:rounded-[10px] tw:p-4 tw:items-center">
                 <TailChase size="40" speed="1.75" color="#03A9F4" />
             </div>
         );
@@ -49,8 +49,9 @@ function DisplayUser({ userId }) {
             <div className="tw:flex tw:w-[330px] tw:gap-2 tw:border tw:border-primary tw:rounded-[10px] tw:p-4">
                 <img src="/images/photo_icon.svg" alt="photo" className="tw:w-12 tw:h-12" />
                 <ul>
-                    <li>{`${data.user.firstname} ${data.user.lastname}`}</li>
-                    <li>{data.user.email}</li>
+                    <li className="tw-truncate tw-text-xs tw-text-gray-600 tw-max-w-[280px]" title={data.user.firstname + ' ' + data.user.lastname}>{`${data.user.firstname} ${data.user.lastname}`}</li>
+                    <li className="tw-truncate tw-text-xs tw-text-gray-600 tw-max-w-[280px]" title={data.user.email}>{data.user.email}</li>
+                    
                 </ul>
             </div>
         </div>
