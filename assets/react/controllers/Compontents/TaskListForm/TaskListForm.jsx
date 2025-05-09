@@ -38,7 +38,7 @@ function TaskListForm({ onAddTaskList, loading, error }) {
                     className="w-full border rounded p-2"
                 />
                 <button
-                    type="submit"
+                    type="button"
                     disabled={loading}
                     className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
                 >

@@ -29,9 +29,12 @@ const GET_USER = gql`
  * @returns {Element}
  * @constructor
  */
-function DisplayUser({ userId }) {
+const DisplayUser = React.memo(({ userId }) => {
+    console.log("DisplayUser rendered", new Date().toISOString());
+
     const { loading, error, data } = useQuery(GET_USER,{
         variables: { id: `/api/users/${userId}` },
+        fetchPolicy: 'cache-first'
     });
 
     if (loading) {
@@ -56,11 +59,23 @@ function DisplayUser({ userId }) {
             </div>
         </div>
     );
-}
-export default function UserRequest({userId}) {
+}, (prev, next) => prev.userId === next.userId);
+
+/*const UserRequest = ({userId}) => {
     return (
         <div>
             <DisplayUser userId={userId}/>
         </div>
     );
-}
+};*/
+
+const UserRequest = React.memo(({ userId }) => {
+    return (
+        <div>
+            <DisplayUser userId={userId} />
+        </div>
+    );
+}, (prev, next) => prev.userId === next.userId);
+
+export default UserRequest;
+
