@@ -4,6 +4,7 @@ import TaskListContainer from "./Compontents/TaskListContainer/TaskListContainer
 import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListFormContainer";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import User from './Compontents/User/User'
+import Modal from './Compontents/Modal/Modal';
 /**
  * TodoList dashboard
  *
@@ -20,12 +21,18 @@ export default function ({id, host}) {
         });
       }, [host]);
 
-    const [content, setContent] = useState('');
+    // const [content, setContent] = useState('');
 
-    const addNewTaskList = useCallback(() => {
+    /*const addNewTaskList = useCallback(() => {
         console.log("Add new task clicked");
         setContent('task_list');
-    }, []);
+    }, []);*/
+
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = useCallback(() => setShowModal(true), []);
+    const closeModal = useCallback(() => setShowModal(false), []);
+  
 
     useEffect(() => {
         console.log("Form mounted");
@@ -38,10 +45,12 @@ export default function ({id, host}) {
                     <aside className="tw:fixed tw:flex tw:flex-col tw:top-[96px] tw:left-0 tw:h-[calc(100vh-96px)] tw:w-[360px] tw:bg-gradient-to-b tw:from-[#E3F2FD] tw:to-[#F8FAFC] tw:text-text-main tw:p-4 tw:shadow-lg">
                         <>
                             <TaskListContainer userId={id} />
-                            <Button onClick={addNewTaskList}>Create a new Task List</Button>
-                            {
-                                content === 'task_list' && <TaskListFormContainer userId={id} />
-                            }
+                            <Button onClick={openModal}>Create a new Task List</Button>
+                                {showModal && (
+                                    <Modal onClose={closeModal}>
+                                        <TaskListFormContainer userId={id} onSuccess={closeModal} />
+                                    </Modal>
+                                )}
                         </>
                         <div className="tw:mt-auto">
                             <User userId={id} />

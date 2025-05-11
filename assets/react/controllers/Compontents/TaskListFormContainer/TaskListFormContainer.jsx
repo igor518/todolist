@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import TaskListForm from '../TaskListForm/TaskListForm';
 import {GET_TASK_LISTS, CREATE_TASKLIST } from '../graphql_query'
-function TaskListFormContainer({ userId }) {
+function TaskListFormContainer({ userId, onSuccess }) {
     const [createTaskList, { loading, error }] = useMutation(CREATE_TASKLIST);
 
     const handleAddTaskList = async (name, description) => {
@@ -38,6 +38,7 @@ function TaskListFormContainer({ userId }) {
             onAddTaskList={handleAddTaskList}
             loading={loading}
             error={error}
+            onSuccess={onSuccess}
         />
     );
 }

@@ -61,21 +61,21 @@ const DisplayUser = React.memo(({ userId }) => {
     );
 }, (prev, next) => prev.userId === next.userId);
 
-/*const UserRequest = ({userId}) => {
+const UserRequest = ({userId}) => {
     return (
         <div>
             <DisplayUser userId={userId}/>
         </div>
     );
-};*/
+};
 
-const UserRequest = React.memo(({ userId }) => {
+/*const UserRequest = React.memo(({ userId }) => {
     return (
         <div>
             <DisplayUser userId={userId} />
         </div>
     );
-}, (prev, next) => prev.userId === next.userId);
+}, (prev, next) => prev.userId === next.userId);*/
 
 export default UserRequest;
 
