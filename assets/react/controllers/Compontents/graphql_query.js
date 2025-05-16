@@ -29,3 +29,12 @@ export const GET_TASK_LISTS = gql`
     }
   }
 `;
+export const DELETE_TASK_LIST = gql`
+  mutation deleteTaskList($input: deleteTaskListInput!) {
+    deleteTaskList(input: $input) {
+      taskList {
+        id
+      }
+    }
+   }
+`;

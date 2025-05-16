@@ -5,6 +5,7 @@ import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListF
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import User from './Compontents/User/User'
 import Modal from './Compontents/Modal/Modal';
+
 /**
  * TodoList dashboard
  *
@@ -21,15 +22,7 @@ export default function ({id, host}) {
         });
       }, [host]);
 
-    // const [content, setContent] = useState('');
-
-    /*const addNewTaskList = useCallback(() => {
-        console.log("Add new task clicked");
-        setContent('task_list');
-    }, []);*/
-
     const [showModal, setShowModal] = useState(false);
-
     const openModal = useCallback(() => setShowModal(true), []);
     const closeModal = useCallback(() => setShowModal(false), []);
   
@@ -59,9 +52,7 @@ export default function ({id, host}) {
                     <main className="tw:ml-[360px] tw:p-4">
                         
                     </main>
-
                 </div>
-                    
             </ApolloProvider>
         </>
     );

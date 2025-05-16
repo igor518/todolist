@@ -1,6 +1,6 @@
 import { TailChase } from "ldrs/react";
 
-const TaskList = ({taskLists, loading, error}) => {
+const TaskList = ({taskLists, loading, error, onRemoveList}) => {
     if (loading) return (
         <div className="tw:mb-2 tw:flex tw:justify-center tw:items-center">
             <TailChase size="40" speed="1.75" color="#03A9F4" />
@@ -18,10 +18,8 @@ const TaskList = ({taskLists, loading, error}) => {
             </div>
         );
     }
-
     return (
         <>
-        
             <ul>
                 {taskLists.map((taskList) => (
                     <li key={taskList.node.id} className="tw:p-2 tw:font-text ">
@@ -30,7 +28,8 @@ const TaskList = ({taskLists, loading, error}) => {
                         {taskList.node.name}
                     </p>
                     <p className="tw:text-text-gray">{taskList.node.description}</p>
-                </li>
+                        <a href="#" onClick={onRemoveList.bind(this, taskList.node.id)}>Delete List</a>
+                    </li>
                 ))}
             </ul>
         </>
