@@ -1,6 +1,15 @@
 import { useMutation } from '@apollo/client';
 import TaskListForm from '../TaskListForm/TaskListForm';
 import {GET_TASK_LISTS, CREATE_TASKLIST } from '../graphql_query'
+
+/**
+ * Wrap apollo creating a new list
+ *
+ * @param userId
+ * @param onSuccess
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function TaskListFormContainer({ userId, onSuccess }) {
     const [createTaskList, { loading, error }] = useMutation(CREATE_TASKLIST);
 
