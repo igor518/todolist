@@ -1,6 +1,6 @@
 import { TailChase } from "ldrs/react";
 
-const TaskList = ({taskLists, loading, error, onRemoveList}) => {
+const TaskList = ({taskLists, loading, error, onRemoveList, onSelectList}) => {
     if (loading) return (
         <div className="tw:mb-2 tw:flex tw:justify-center tw:items-center">
             <TailChase size="40" speed="1.75" color="#03A9F4" />
@@ -8,6 +8,7 @@ const TaskList = ({taskLists, loading, error, onRemoveList}) => {
     );
 
     if (error) return <p className="text-red-500 text-center mt-4">Error loading tasks.</p>;
+    // /const isSelected = selectedListId === taskList.node.id;
 
     if (taskLists.length === 0) {
         return (
@@ -22,7 +23,7 @@ const TaskList = ({taskLists, loading, error, onRemoveList}) => {
         <>
             <ul>
                 {taskLists.map((taskList) => (
-                    <li key={taskList.node.id} className="tw:p-2 tw:font-text ">
+                    <li key={taskList.node.id} className="tw:p-2 tw:font-text" onClick={() => onSelectList(taskList.node.id)}>
                     <p className="tw:font-semibold tw:text-lg tw:flex tw:items-center tw:gap-2 tw:text-text-main">
                         <button className="tw:text-secondary tw:text-xl">+</button>
                         {taskList.node.name}
