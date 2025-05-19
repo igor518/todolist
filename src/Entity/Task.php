@@ -4,13 +4,26 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GraphQl\DeleteMutation;
+use ApiPlatform\Metadata\GraphQl\Mutation;
+use ApiPlatform\Metadata\GraphQl\Query;
+use ApiPlatform\Metadata\GraphQl\QueryCollection;
 use App\Repository\TaskRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
-#[ApiResource]
+#[ApiResource(graphQlOperations: [
+    new Query(),
+    new QueryCollection(),
+    new Mutation(name: 'create'),
+    new Mutation(name: 'update'),
+    new DeleteMutation(name: 'delete')
+])]
+#[ApiFilter(SearchFilter::class, properties: ['task_list' => 'exact'])]
 class Task
 {
     #[ORM\Id]

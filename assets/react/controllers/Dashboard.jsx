@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import Button from "./Compontents/Button/Button";
 import TaskListContainer from "./Compontents/TaskListContainer/TaskListContainer";
+import TaskContainer from "./Compontents/TaskContainer/TaskContainer";
 import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListFormContainer";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import User from './Compontents/User/User'
@@ -23,9 +24,13 @@ export default function ({id, host}) {
       }, [host]);
 
     const [showModal, setShowModal] = useState(false);
+    const [selectedTaskList, setSelectedTaskList]  = useState(null);
     const openModal = useCallback(() => setShowModal(true), []);
     const closeModal = useCallback(() => setShowModal(false), []);
-  
+
+    const handleSelectList = (id) => {
+        setSelectedTaskList(id);
+    };
 
     useEffect(() => {
         console.log("Form mounted");
@@ -37,7 +42,7 @@ export default function ({id, host}) {
                 <div className='tw:flex'>
                     <aside className="tw:fixed tw:flex tw:flex-col tw:top-[96px] tw:left-0 tw:h-[calc(100vh-96px)] tw:w-[360px] tw:bg-gradient-to-b tw:from-[#E3F2FD] tw:to-[#F8FAFC] tw:text-text-main tw:p-4 tw:shadow-lg">
                         <>
-                            <TaskListContainer userId={id} />
+                            <TaskListContainer userId={id} selectTaskListCallback={handleSelectList}  />
                             <Button onClick={openModal}>Create a new Task List</Button>
                                 {showModal && (
                                     <Modal onClose={closeModal}>
@@ -50,7 +55,7 @@ export default function ({id, host}) {
                         </div>
                     </aside> 
                     <main className="tw:ml-[360px] tw:p-4">
-                        
+                        <TaskContainer taskListId={selectedTaskList} />
                     </main>
                 </div>
             </ApolloProvider>
