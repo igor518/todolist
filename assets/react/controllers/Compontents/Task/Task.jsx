@@ -11,7 +11,7 @@ const Task = ({tasks, loading, error}) => {
         return (
             <div className="tw:flex tw:flex-col tw:items-center tw:justify-center  tw:p-8">
                 <p className="tw:text-lg tw:text-gray-700 tw:mb-4">
-                    You have no task lists yet, create your first to-do list.
+                    You have no tasks yet, create your first task.
                 </p>
             </div>
         );

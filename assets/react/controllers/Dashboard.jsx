@@ -42,7 +42,7 @@ export default function ({id, host}) {
                 <div className='tw:flex'>
                     <aside className="tw:fixed tw:flex tw:flex-col tw:top-[96px] tw:left-0 tw:h-[calc(100vh-96px)] tw:w-[360px] tw:bg-gradient-to-b tw:from-[#E3F2FD] tw:to-[#F8FAFC] tw:text-text-main tw:p-4 tw:shadow-lg">
                         <>
-                            <TaskListContainer userId={id} selectTaskListCallback={handleSelectList}  />
+                            <TaskListContainer userId={id} selectedListId={selectedTaskList} selectTaskListCallback={handleSelectList}  />
                             <Button onClick={openModal}>Create a new Task List</Button>
                                 {showModal && (
                                     <Modal onClose={closeModal}>
