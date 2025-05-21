@@ -1,8 +1,9 @@
 import {useMutation, useQuery} from '@apollo/client';
 import TaskList from '../TaskList/TaskList';
 import {GET_TASK_LISTS, DELETE_TASK_LIST} from '../graphql_query'
+import {useEffect} from "react";
 
-function TaskListContainer({userId, selectTaskListCallback}) {
+function TaskListContainer({userId, selectedListId, selectTaskListCallback}) {
     const { data, loading, error } = useQuery(GET_TASK_LISTS, {
         variables: {
             first: 10,
@@ -10,6 +11,12 @@ function TaskListContainer({userId, selectTaskListCallback}) {
         }
     });
     const [deleteTaskList] = useMutation(DELETE_TASK_LIST);
+
+    useEffect(() => {
+        if (!loading && data?.taskLists?.edges.length && selectedListId == null) {
+            selectTaskListCallback(data?.taskLists?.edges[0].node.id);
+        }
+    }, [selectedListId, data, loading, selectTaskListCallback]);
     const onRemoveList = async (itemId) => {
         try {
             await deleteTaskList({
@@ -40,6 +47,7 @@ function TaskListContainer({userId, selectTaskListCallback}) {
             loading={loading}
             error={error}
             onSelectList={selectTaskListCallback}
+            selectedListId={selectedListId}
             onRemoveList={onRemoveList}
         />
     );
