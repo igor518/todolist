@@ -6,6 +6,7 @@ import TaskListFormContainer from "./Compontents/TaskListFormContainer/TaskListF
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import User from './Compontents/User/User'
 import Modal from './Compontents/Modal/Modal';
+import TaskFormContainer from './Compontents/TaskFormContainer/TaskFormContainer';
 
 /**
  * TodoList dashboard
@@ -24,8 +25,11 @@ export default function ({id, host}) {
       }, [host]);
 
     const [showModal, setShowModal] = useState(false);
+    const [showNewTaskModal, setShowNewTaskModal] = useState(false);
     const [selectedTaskList, setSelectedTaskList]  = useState(null);
     const openModal = useCallback(() => setShowModal(true), []);
+    const openNewTaskModal = useCallback(() => setShowNewTaskModal(true), []);
+    const closeNewTaskModal = useCallback(() => setShowNewTaskModal(false), []);
     const closeModal = useCallback(() => setShowModal(false), []);
 
     const handleSelectList = (id) => {
@@ -56,6 +60,12 @@ export default function ({id, host}) {
                     </aside> 
                     <main className="tw:ml-[360px] tw:p-4">
                         <TaskContainer taskListId={selectedTaskList} />
+                        <Button onClick={openNewTaskModal}>Create a new Task</Button>
+                        {showNewTaskModal && (
+                            <Modal onClose={closeNewTaskModal}>
+                                <TaskFormContainer selectedTaskList={selectedTaskList} userId={id} onSuccess={closeNewTaskModal}/>
+                            </Modal>
+                        )}
                     </main>
                 </div>
             </ApolloProvider>

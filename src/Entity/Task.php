@@ -49,7 +49,7 @@ class Task
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     private ?User $user_id = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?TaskList $task_list = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
@@ -58,7 +58,7 @@ class Task
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $due_date = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     private ?User $assigned_user = null;
 
     public function getId(): ?int
