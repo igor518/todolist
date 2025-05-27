@@ -5,9 +5,19 @@ import 'ldrs/react/TailChase.css';
 import './index.css';
 
 /**
- * Retrieves user data
+ * GraphQL query to retrieve user information based on a specified user ID.
+ * This query accepts an ID as a parameter and returns the user's details.
+ * It fetches the following fields: id, firstname, lastname, and email.
  *
- * @type {DocumentNode}
+ * Variable:
+ * - id (ID!): The unique identifier of the user to be fetched.
+ *
+ * Returns:
+ * - user: An object containing user details.
+ *   - id (String): Unique identifier of the user.
+ *   - firstname (String): First name of the user.
+ *   - lastname (String): Last name of the user.
+ *   - email (String): Email address of the user.
  */
 const GET_USER = gql`
     query getUser ($id: ID!) {
@@ -20,15 +30,12 @@ const GET_USER = gql`
     }
 `;
 
-
 /**
- * Get user data from
- * server
+ * A React memoized functional component that fetches and displays user information.
  *
- * @param user
- * @returns {Element}
- * @constructor
- */
+ * @const {React.MemoExoticComponent<React.FC<{ userId: string }>>} DisplayUser
+ * @param {Object} props - The component's props.
+ * @param*/
 const DisplayUser = React.memo(({ userId }) => {
     console.log("DisplayUser rendered", new Date().toISOString());
 
@@ -69,13 +76,4 @@ const UserRequest = ({userId}) => {
     );
 };
 
-/*const UserRequest = React.memo(({ userId }) => {
-    return (
-        <div>
-            <DisplayUser userId={userId} />
-        </div>
-    );
-}, (prev, next) => prev.userId === next.userId);*/
-
 export default UserRequest;
-

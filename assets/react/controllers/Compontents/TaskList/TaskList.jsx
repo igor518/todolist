@@ -1,5 +1,18 @@
 import { TailChase } from "ldrs/react";
 
+/**
+ * Component for displaying a list of tasks with interactive features such as selection and removal.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Array} props.taskLists - Array of task list objects to be rendered. Each task list object includes details like `id`, `name`, and `description`.
+ * @param {boolean} props.loading - Indicates whether the task lists are currently being loaded.
+ * @param {string|null} props.error - Indicates if there was an error loading the task lists. If present, an error message will be displayed.
+ * @param {Function} props.onRemoveList - Callback function to handle the removal of a task list. Receives the `id` of the task list to be removed as an argument.
+ * @param {string} props.selectedListId - The `id` of the currently selected task list. The selected task list will be visually highlighted.
+ * @param {Function} props.onSelectList - Callback function to handle the selection of a task list. Receives the `id` of the selected task list as an argument.
+ *
+ * @returns {JSX.Element} Renders a list of task lists. Handles loading and error states. Shows a message if no task lists are available.
+ */
 const TaskList = ({taskLists, loading, error, onRemoveList, selectedListId, onSelectList}) => {
     if (loading) return (
         <div className="tw:mb-2 tw:flex tw:justify-center tw:items-center">

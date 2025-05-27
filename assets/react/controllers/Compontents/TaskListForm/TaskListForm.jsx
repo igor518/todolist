@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Leapfrog } from 'ldrs/react'
-import 'ldrs/react/Leapfrog.css'
+import { Leapfrog } from 'ldrs/react';
+import 'ldrs/react/Leapfrog.css';
 
 function TaskListForm({ onAddTaskList, loading, error, onSuccess }) {
     const [name, setName] = useState('');
@@ -29,7 +29,6 @@ function TaskListForm({ onAddTaskList, loading, error, onSuccess }) {
         <>
             <form onSubmit={handleSubmit} className="tw:space-y-4">
                 <h2 className="tw:font-display tw:text-primary tw:text-xl tw:font-semibold tw:text-center">New Task List</h2>
-
                 <input
                     type="text"
                     value={name}
@@ -62,7 +61,6 @@ function TaskListForm({ onAddTaskList, loading, error, onSuccess }) {
                         : ('Create Task List')}
                     </span>
                 </button>
-
                 {error && (
                     <p className="tw:text-red-500 tw:text-sm tw:text-center">
                         Failed to create Task List: {error.message}
