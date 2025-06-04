@@ -42,7 +42,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, loading, error, status}) => 
         }
     };
 
-    const getStatusButton = (task) => {
+    const getStatusButtons = (task) => {
         switch (status) {
             case 'open':
                 return (
@@ -55,11 +55,28 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, loading, error, status}) => 
                 );
             case 'in_progress':
                 return (
+                    <div className="tw:flex tw:gap-2">
+                        <button
+                            onClick={() => onUpdateStatus(task.node.id, 'open')}
+                            className="tw:bg-blue-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-blue-600 tw:transition-colors"
+                        >
+                            Stop
+                        </button>
+                        <button
+                            onClick={() => onUpdateStatus(task.node.id, 'done')}
+                            className="tw:bg-green-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-green-600 tw:transition-colors"
+                        >
+                            Done
+                        </button>
+                    </div>
+                );
+            case 'done':
+                return (
                     <button
-                        onClick={() => onUpdateStatus(task.node.id, 'done')}
-                        className="tw:bg-green-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-green-600 tw:transition-colors"
+                        onClick={() => onUpdateStatus(task.node.id, 'in_progress')}
+                        className="tw:bg-yellow-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-yellow-600 tw:transition-colors"
                     >
-                        Done
+                        Reopen
                     </button>
                 );
             default:
@@ -77,7 +94,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, loading, error, status}) => 
                     <div className="tw:flex tw:justify-between tw:items-start tw:mb-2">
                         <h3 className="tw:font-semibold tw:text-lg tw:text-gray-800">{task.node.title}</h3>
                         <div className="tw:flex tw:items-center tw:gap-2">
-                            {getStatusButton(task)}
+                            {getStatusButtons(task)}
                             <button 
                                 onClick={() => onRemoveTask(task.node.id)}
                                 className="tw:text-gray-400 hover:tw:text-red-500 tw:transition-colors"
