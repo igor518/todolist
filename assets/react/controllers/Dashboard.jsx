@@ -101,14 +101,20 @@ function DashboardContent({userId}) {
                                 </div>
                             </div>
                         </div>
-                        <div className="tw:mt-4">
-                            <Button onClick={openNewTaskModal}>Create a new Task</Button>
-                            {showNewTaskModal && (
-                                <Modal onClose={closeNewTaskModal}>
-                                    <TaskFormContainer selectedTaskList={selectedTaskList} userId={userId} onSuccess={closeNewTaskModal}/>
-                                </Modal>
-                            )}
-                        </div>
+                        {selectedTaskList ? (
+                            <div className="tw:mt-4">
+                                <Button onClick={openNewTaskModal}>Create a new Task</Button>
+                                {showNewTaskModal && (
+                                    <Modal onClose={closeNewTaskModal}>
+                                        <TaskFormContainer selectedTaskList={selectedTaskList} userId={userId} onSuccess={closeNewTaskModal}/>
+                                    </Modal>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="tw:mt-4 tw:text-center tw:text-gray-500">
+                                Please select a task list to create tasks
+                            </div>
+                        )}
                     </>
                 )}
             </main>
