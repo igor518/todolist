@@ -44,7 +44,7 @@ function DashboardContent({userId}) {
     const { data: taskListsData } = useQuery(GET_TASK_LISTS, {
         variables: {
             first: 10,
-            userId: userId
+            owner: "api/users/" + userId
         }
     });
 
@@ -75,8 +75,7 @@ function DashboardContent({userId}) {
                     <div className="tw:flex tw:flex-col tw:items-center tw:justify-center tw:h-[calc(100vh-200px)]">
                         <div className="tw:text-center">
                             <h2 className="tw:text-2xl tw:font-semibold tw:text-gray-700 tw:mb-4">Welcome to Your Task Manager</h2>
-                            <p className="tw:text-gray-500 tw:mb-6">Please create your first task list to get started</p>
-                            <Button onClick={openModal}>Create a new Task List</Button>
+                            <p className="tw:text-gray-500 tw:mb-6">Please create your first task list using the button in the sidebar to get started</p>
                         </div>
                     </div>
                 ) : (
