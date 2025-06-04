@@ -14,7 +14,7 @@ import {CREATE_TASK, GET_TASK_LISTS, GET_TASKS} from '../graphql_query';
 function TaskFormContainer({selectedTaskList, onSuccess, userId}) {
     const [createNewTask, { loading, error }] = useMutation(CREATE_TASK);
 
-    const handleNewTask = async (title, description, progress, dueDate) => {
+    const handleNewTask = async (title, description, progress, dueDate, status) => {
         try {
             await createNewTask({
                 variables: {
@@ -24,7 +24,7 @@ function TaskFormContainer({selectedTaskList, onSuccess, userId}) {
                         taskList: selectedTaskList,
                         task_list: selectedTaskList,
                         progress: parseInt(progress),
-                        status: "open",
+                        status: status,
                         user_id: "api/users/" + userId,
                         assigned_user: "api/users/" + userId,
                         createdAt: new Date().toISOString(),
