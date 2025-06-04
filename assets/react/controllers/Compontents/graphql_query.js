@@ -155,3 +155,22 @@ export const DELETE_TASK = gql`
     }
    }
 `;
+
+/**
+ * GraphQL mutation for updating a task.
+ * Used for updating task properties including status.
+ */
+export const UPDATE_TASK = gql`
+  mutation updateTask($input: updateTaskInput!) {
+    updateTask(input: $input) {
+      task {
+        id
+        title
+        description
+        status
+        progress
+        dueDate
+      }
+    }
+  }
+`;

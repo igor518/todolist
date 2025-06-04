@@ -1,6 +1,6 @@
 import {useMutation, useQuery} from '@apollo/client';
 import Task from '../Task/Task';
-import {GET_TASKS, DELETE_TASK} from '../graphql_query'
+import {GET_TASKS, DELETE_TASK, UPDATE_TASK} from '../graphql_query'
 
 /**
  * Component to fetch and display a list of tasks associated with a specific task list and status.
@@ -12,6 +12,7 @@ import {GET_TASKS, DELETE_TASK} from '../graphql_query'
  */
 function TaskContainer({taskListId, status}) {
     const [deleteTask] = useMutation(DELETE_TASK);
+    const [updateTask] = useMutation(UPDATE_TASK);
     const {data, loading, error} = useQuery(GET_TASKS, {
         variables: {
             first: 10,
@@ -45,12 +46,39 @@ function TaskContainer({taskListId, status}) {
         }
     }
 
+    const onUpdateStatus = async (taskId, newStatus) => {
+        try {
+            await updateTask({
+                variables: {
+                    input: {
+                        id: taskId,
+                        status: newStatus,
+                        updatedAt: new Date().toISOString(),
+                        updated_at: new Date().toISOString()
+                    }
+                },
+                refetchQueries: [
+                    {
+                        query: GET_TASKS,
+                        variables: {
+                            first: 10,
+                            taskList: taskListId
+                        }
+                    }
+                ]
+            });
+        } catch (err) {
+            console.error("An error occurred while updating task status: ", err);
+        }
+    };
+
     return (
         <Task
             tasks={filteredTasks}
             loading={loading}
             error={error}
             onRemoveTask={onRemoveTask}
+            onUpdateStatus={onUpdateStatus}
             status={status}
         />
     );
