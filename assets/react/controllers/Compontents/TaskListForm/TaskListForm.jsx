@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import { Leapfrog } from 'ldrs/react';
 import 'ldrs/react/Leapfrog.css';
 
+/**
+ *
+ * @param onAddTaskList
+ * @param loading
+ * @param error
+ * @param onSuccess
+ * @returns {Element}
+ * @constructor
+ */
 function TaskListForm({ onAddTaskList, loading, error, onSuccess }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');

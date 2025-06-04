@@ -42,7 +42,7 @@ function TaskContainer({taskListId, status}) {
                 ]
             });
         } catch (err) {
-            console.dir("An error occured while deleting a task: ", err);
+            console.dir("An error occurred while deleting a task: ", err);
         }
     }
 
@@ -72,6 +72,32 @@ function TaskContainer({taskListId, status}) {
         }
     };
 
+    const onUpdateProgress = async (taskId, newProgress) => {
+        try {
+            await updateTask({
+                variables: {
+                    input: {
+                        id: taskId,
+                        progress: newProgress,
+                        updatedAt: new Date().toISOString(),
+                        updated_at: new Date().toISOString()
+                    }
+                },
+                refetchQueries: [
+                    {
+                        query: GET_TASKS,
+                        variables: {
+                            first: 10,
+                            taskList: taskListId
+                        }
+                    }
+                ]
+            });
+        } catch (err) {
+            console.error("An error occurred while updating task progress: ", err);
+        }
+    };
+
     return (
         <Task
             tasks={filteredTasks}
@@ -79,6 +105,7 @@ function TaskContainer({taskListId, status}) {
             error={error}
             onRemoveTask={onRemoveTask}
             onUpdateStatus={onUpdateStatus}
+            onUpdateProgress={onUpdateProgress}
             status={status}
         />
     );
