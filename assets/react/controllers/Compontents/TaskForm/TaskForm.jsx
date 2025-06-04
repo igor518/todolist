@@ -3,21 +3,22 @@ import {Leapfrog} from "ldrs/react";
 
 /**
  * Component for creating a new task using an interactive form.
- * It allows users to input a task title and description.
+ * It allows users to input a task title, description, status, and other details.
  *
  * @param {Object} props - The props object.
- * @param {function} props.handleNewTask - Callback function for handling the creation of a new task. It should accept a task name and description as arguments.
+ * @param {function} props.handleNewTask - Callback function for handling the creation of a new task.
  * @param {boolean} props.loading - Flag indicating whether the form is in a loading state.
  * @param {Error|null} props.error - An error object representing any issue that occurred during task creation. Null if no error exists.
  * @param {function} [props.onSuccess] - Optional callback function invoked after successfully creating a task.
  *
- * @return {JSX.Element} A form element that includes input fields for task name, description, and a submit button to create a new task.
+ * @return {JSX.Element} A form element that includes input fields for task details and a submit button.
  */
 function TaskForm({handleNewTask, loading, error, onSuccess}) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [progress, setProgress] = useState(0);
     const [dueDate, setDueDate] = useState(0);
+    const [status, setStatus] = useState('open');
 
     const submitForm = async (e, data) => {
         e.preventDefault();
@@ -27,9 +28,10 @@ function TaskForm({handleNewTask, loading, error, onSuccess}) {
         }
 
         try {
-            await handleNewTask(title, description, progress, dueDate);
+            await handleNewTask(title, description, progress, dueDate, status);
             setTitle('');
             setDescription('');
+            setStatus('open');
 
             if (onSuccess) onSuccess();
         } catch {
@@ -47,6 +49,15 @@ function TaskForm({handleNewTask, loading, error, onSuccess}) {
                 onChange={(e) => setTitle(e.target.value)}
                 className="tw:w-full tw:border tw:rounded tw:p-2 focus:tw:outline-none focus:tw:ring focus:tw:border-blue-300"
             />
+            <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="tw:w-full tw:border tw:rounded tw:p-2 focus:tw:outline-none focus:tw:ring focus:tw:border-blue-300"
+            >
+                <option value="open">Open</option>
+                <option value="in_progress">In Progress</option>
+                <option value="done">Done</option>
+            </select>
             <input
                 type="progress"
                 value={progress}
