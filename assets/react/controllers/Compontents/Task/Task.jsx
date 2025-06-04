@@ -73,8 +73,8 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, loading, error, status}) => 
             case 'done':
                 return (
                     <button
-                        onClick={() => onUpdateStatus(task.node.id, 'in_progress')}
-                        className="tw:bg-yellow-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-yellow-600 tw:transition-colors"
+                        onClick={() => onUpdateStatus(task.node.id, 'open')}
+                        className="tw:bg-blue-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-blue-600 tw:transition-colors"
                     >
                         Reopen
                     </button>
