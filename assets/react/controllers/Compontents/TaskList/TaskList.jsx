@@ -129,13 +129,13 @@ const TaskList = ({
                                     <>
                                         <button
                                             onClick={(e) => handleDelete(e, taskList.node.id)}
-                                            className="tw:px-3 tw:py-1 tw:text-sm tw:font-semibold tw:text-white tw:bg-red-500 tw:rounded hover:tw:bg-red-600 tw:transition-colors"
+                                            className="tw:px-4 tw:py-1.5 tw:text-sm tw:font-semibold tw:text-white tw:bg-gradient-to-r tw:from-red-600 tw:to-red-500 tw:rounded-lg tw:hover:from-red-700 tw:hover:to-red-600 tw:shadow-sm tw:transition-all tw:duration-200"
                                         >
                                             Confirm
                                         </button>
                                         <button
                                             onClick={handleCancelDelete}
-                                            className="tw:px-3 tw:py-1 tw:text-sm tw:font-semibold tw:text-gray-600 tw:bg-gray-100 tw:rounded hover:tw:bg-gray-200 tw:transition-colors"
+                                            className="tw:px-4 tw:py-1.5 tw:text-sm tw:font-semibold tw:text-text-main tw:bg-gradient-to-r tw:from-gray-50 tw:to-gray-100 tw:rounded-lg tw:hover:from-gray-100 tw:hover:to-gray-200 tw:border tw:border-gray-200 tw:shadow-sm tw:transition-all tw:duration-200"
                                         >
                                             Cancel
                                         </button>
@@ -143,7 +143,7 @@ const TaskList = ({
                                 ) : (
                                     <button
                                         onClick={(e) => handleDelete(e, taskList.node.id)}
-                                        className="tw:p-1.5 tw:text-gray-400 tw:hover:text-secondary tw:rounded-full tw:transition-all"
+                                        className="tw:p-1.5 tw:text-gray-400 tw:hover:text-secondary tw:rounded-full tw:transition-all tw:cursor-pointer"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" className="tw:w-5 tw:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
