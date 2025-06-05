@@ -19,8 +19,10 @@ import { GET_TASK_LISTS } from './Compontents/graphql_query';
  */
 export default function ({id, host}) {
     const client = useMemo(() => {
+        // Use the same protocol as the current page
+        const protocol = window.location.protocol;
         return new ApolloClient({
-          uri: `https://${host}/api/graphql`,
+          uri: `${protocol}//${host}/api/graphql`,
           cache: new InMemoryCache(),
         });
       }, [host]);
@@ -80,6 +82,20 @@ function DashboardContent({userId}) {
                     </div>
                 ) : (
                     <>
+                        {selectedTaskList ? (
+                            <div className="tw:mb-4">
+                                <Button onClick={openNewTaskModal}>Create a new Task</Button>
+                                {showNewTaskModal && (
+                                    <Modal onClose={closeNewTaskModal}>
+                                        <TaskFormContainer selectedTaskList={selectedTaskList} userId={userId} onSuccess={closeNewTaskModal}/>
+                                    </Modal>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="tw:mt-4 tw:text-center tw:text-gray-500">
+                                Please select a task list to create tasks
+                            </div>
+                        )}
                         <div className="tw:flex tw:gap-4">
                             <div className="tw:flex-1 tw:min-w-0">
                                 <div className="tw:bg-gray-50 tw:rounded-lg tw:p-4">
@@ -100,20 +116,6 @@ function DashboardContent({userId}) {
                                 </div>
                             </div>
                         </div>
-                        {selectedTaskList ? (
-                            <div className="tw:mt-4">
-                                <Button onClick={openNewTaskModal}>Create a new Task</Button>
-                                {showNewTaskModal && (
-                                    <Modal onClose={closeNewTaskModal}>
-                                        <TaskFormContainer selectedTaskList={selectedTaskList} userId={userId} onSuccess={closeNewTaskModal}/>
-                                    </Modal>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="tw:mt-4 tw:text-center tw:text-gray-500">
-                                Please select a task list to create tasks
-                            </div>
-                        )}
                     </>
                 )}
             </main>
