@@ -1,5 +1,6 @@
 .button {
     border: 1px solid #1d4ed8;
+    box-sizing: 10px;
     padding: 5px;
 }
 .button:hover {
