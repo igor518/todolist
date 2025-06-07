@@ -76,7 +76,7 @@ const TaskList = ({
                     className={`tw:p-2 tw:rounded-lg tw:transition-all tw:duration-200 tw:cursor-pointer ${
                         currentPage === 1
                             ? 'tw:text-gray-400 tw:cursor-not-allowed'
-                            : 'tw:text-secondary hover:tw:bg-blue-50'
+                            : 'tw:text-secondary tw:hover:bg-blue-50'
                     }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="tw:h-5 tw:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,8 +91,8 @@ const TaskList = ({
                     disabled={currentPage === totalPages}
                     className={`tw:p-2 tw:rounded-lg tw:transition-all tw:duration-200 tw:cursor-pointer ${
                         currentPage === totalPages
-                            ? 'tw:bg-gray-100 tw:text-gray-400 tw:cursor-not-allowed'
-                            : 'tw:text-secondary hover:tw:bg-blue-50'
+                            ? 'tw:text-gray-400 tw:cursor-not-allowed'
+                            : 'tw:text-secondary tw:hover:bg-blue-50'
                     }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="tw:h-5 tw:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

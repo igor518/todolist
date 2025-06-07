@@ -11,7 +11,7 @@ import './index.css';
 export default function Button({children, onClick}) {
     return (
         <button 
-            className="button tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:tracking-wide tw:transition-all tw:duration-300 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]" 
+            className="button tw:text-white tw:border tw:w-full tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:tracking-wide tw:transition-all tw:duration-300 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]" 
             onClick={onClick}
         >
             {children}
