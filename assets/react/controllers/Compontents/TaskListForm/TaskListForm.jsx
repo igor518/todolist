@@ -24,11 +24,11 @@ function TaskListForm({ onAddTaskList, loading, error, onSuccess }) {
         }
 
         try {
-            await onAddTaskList(name, description);
+            const newId = await onAddTaskList(name, description);
             setName('');
             setDescription('');
 
-            if (onSuccess) onSuccess();
+            if (onSuccess) onSuccess(newId);
         } catch {
             // Optionally handled in container already
         }
@@ -56,7 +56,7 @@ function TaskListForm({ onAddTaskList, loading, error, onSuccess }) {
                     disabled={loading}
                     className="tw:relative tw:inline-block tw:text-gray-700 tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition tw:duration-300 tw:overflow-hidden tw:hover:text-white tw:before:absolute tw:before:inset-0 tw:before:bg-white tw:before:transition tw:before:duration-300 tw:before:z-0 tw:hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
                 >
-                    <span class="tw:relative tw:z-10">
+                    <span className="tw:relative tw:z-10">
                         {loading 
                         ? (
                             <>

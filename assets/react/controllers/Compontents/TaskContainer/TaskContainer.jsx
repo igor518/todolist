@@ -16,14 +16,13 @@ function TaskContainer({taskListId, status}) {
     const {data, loading, error} = useQuery(GET_TASKS, {
         variables: {
             first: 10,
-            taskList: taskListId || ''
+            taskList: taskListId
         }
     });
 
     const filteredTasks = data?.tasks?.edges.filter(task => task.node.status === status) || [];
 
     const onRemoveTask = async (itemId) => {
-        console.dir(itemId);
         try {
             await deleteTask({
                 variables: {
@@ -48,25 +47,27 @@ function TaskContainer({taskListId, status}) {
 
     const onUpdateStatus = async (taskId, newStatus) => {
         try {
-            await updateTask({
-                variables: {
-                    input: {
-                        id: taskId,
-                        status: newStatus,
-                        updatedAt: new Date().toISOString(),
-                        updated_at: new Date().toISOString()
-                    }
-                },
-                refetchQueries: [
-                    {
-                        query: GET_TASKS,
-                        variables: {
-                            first: 10,
-                            taskList: taskListId
+            if (taskId && taskListId) {
+                await updateTask({
+                    variables: {
+                        input: {
+                            id: taskId,
+                            status: newStatus,
+                            updatedAt: new Date().toISOString(),
+                            updated_at: new Date().toISOString()
                         }
-                    }
-                ]
-            });
+                    },
+                    refetchQueries: [
+                        {
+                            query: GET_TASKS,
+                            variables: {
+                                first: 10,
+                                taskList: taskListId
+                            }
+                        }
+                    ]
+                });
+            }
         } catch (err) {
             console.error("An error occurred while updating task status: ", err);
         }
@@ -74,25 +75,27 @@ function TaskContainer({taskListId, status}) {
 
     const onUpdateProgress = async (taskId, newProgress) => {
         try {
-            await updateTask({
-                variables: {
-                    input: {
-                        id: taskId,
-                        progress: newProgress,
-                        updatedAt: new Date().toISOString(),
-                        updated_at: new Date().toISOString()
-                    }
-                },
-                refetchQueries: [
-                    {
-                        query: GET_TASKS,
-                        variables: {
-                            first: 10,
-                            taskList: taskListId
+            if (taskId) {
+                await updateTask({
+                    variables: {
+                        input: {
+                            id: taskId,
+                            progress: newProgress,
+                            updatedAt: new Date().toISOString(),
+                            updated_at: new Date().toISOString()
                         }
-                    }
-                ]
-            });
+                    },
+                    refetchQueries: [
+                        {
+                            query: GET_TASKS,
+                            variables: {
+                                first: 10,
+                                taskList: taskListId
+                            }
+                        }
+                    ]
+                });
+            }
         } catch (err) {
             console.error("An error occurred while updating task progress: ", err);
         }

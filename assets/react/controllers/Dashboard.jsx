@@ -64,7 +64,7 @@ function DashboardContent({userId}) {
                     <Button onClick={openModal}>Create a new Task List</Button>
                     {showModal && (
                         <Modal onClose={closeModal}>
-                            <TaskListFormContainer userId={userId} onSuccess={closeModal} />
+                            <TaskListFormContainer userId={userId} onSuccess={(newId) => { setSelectedTaskList(newId); closeModal(); }} />
                         </Modal>
                     )}
                 </>
@@ -73,7 +73,7 @@ function DashboardContent({userId}) {
                 </div>
             </aside>
             <main className="tw:ml-[360px] tw:flex-1 tw:p-4">
-                {!hasTaskLists ? (
+                {(!hasTaskLists || !selectedTaskList) ? (
                     <div className="tw:flex tw:flex-col tw:items-center tw:justify-center tw:h-[calc(100vh-200px)]">
                         <div className="tw:text-center">
                             <h2 className="tw:text-2xl tw:font-semibold tw:text-gray-700 tw:mb-4">Welcome to Your Task Manager</h2>
@@ -82,20 +82,14 @@ function DashboardContent({userId}) {
                     </div>
                 ) : (
                     <>
-                        {selectedTaskList ? (
-                            <div className="tw:mb-4">
-                                <Button onClick={openNewTaskModal}>Create a new Task</Button>
-                                {showNewTaskModal && (
-                                    <Modal onClose={closeNewTaskModal}>
-                                        <TaskFormContainer selectedTaskList={selectedTaskList} userId={userId} onSuccess={closeNewTaskModal}/>
-                                    </Modal>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="tw:mt-4 tw:text-center tw:text-gray-500">
-                                Please select a task list to create tasks
-                            </div>
-                        )}
+                        <div className="tw:mb-4">
+                            <Button onClick={openNewTaskModal}>Create a new Task</Button>
+                            {showNewTaskModal && (
+                                <Modal onClose={closeNewTaskModal}>
+                                    <TaskFormContainer selectedTaskList={selectedTaskList} userId={userId} onSuccess={closeNewTaskModal}/>
+                                </Modal>
+                            )}
+                        </div>
                         <div className="tw:flex tw:gap-4">
                             <div className="tw:flex-1 tw:min-w-0">
                                 <div className="tw:bg-gray-50 tw:rounded-lg tw:p-4">

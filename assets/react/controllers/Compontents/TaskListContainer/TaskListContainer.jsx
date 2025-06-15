@@ -19,7 +19,7 @@ function TaskListContainer({userId, selectedListId, selectTaskListCallback}) {
 
     const { data, loading, error } = useQuery(GET_TASK_LISTS, {
         variables: {
-            first: 100, // Fetch more items to handle client-side pagination
+            first: 100,
             owner: "api/users/" + userId
         }
     });
@@ -27,6 +27,7 @@ function TaskListContainer({userId, selectedListId, selectTaskListCallback}) {
 
     const taskLists = data?.taskLists?.edges || [];
     const totalPages = Math.ceil(taskLists.length / itemsPerPage);
+
     
     // Get current page items
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -34,8 +35,14 @@ function TaskListContainer({userId, selectedListId, selectTaskListCallback}) {
     const currentItems = taskLists.slice(indexOfFirstItem, indexOfLastItem);
 
     useEffect(() => {
-        if (!loading && data?.taskLists?.edges.length && selectedListId == null) {
-            selectTaskListCallback(data?.taskLists?.edges[0].node.id);
+        if (!loading) {
+            if (data?.taskLists?.edges.length === 0 && selectedListId !== null) {
+                // No lists left, reset selection
+                selectTaskListCallback(null);
+            } else if (data?.taskLists?.edges.length && selectedListId == null) {
+                // Select the first list if none is selected
+                selectTaskListCallback(data?.taskLists?.edges[0].node.id);
+            }
         }
     }, [selectedListId, data, loading, selectTaskListCallback]);
 
