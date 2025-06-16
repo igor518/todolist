@@ -61,18 +61,22 @@ function DashboardContent({userId}) {
             <aside className="tw:fixed tw:flex tw:flex-col tw:top-[96px] tw:left-0 tw:h-[calc(100vh-96px)] tw:w-[360px] tw:bg-gradient-to-b tw:from-[#E3F2FD] tw:to-[#F8FAFC] tw:text-text-main tw:p-4 tw:shadow-lg">
                 <>
                     <TaskListContainer userId={userId} selectedListId={selectedTaskList} selectTaskListCallback={handleSelectList} />
-                    <Button onClick={openModal}>Create a new Task List</Button>
-                    {showModal && (
-                        <Modal onClose={closeModal}>
-                            <TaskListFormContainer userId={userId} onSuccess={(newId) => { setSelectedTaskList(newId); closeModal(); }} />
-                        </Modal>
-                    )}
                 </>
                 <div className="tw:mt-auto">
+                    <div className='tw:mb-[15px]'>
+                        <div className="tw:w-full">
+                            <Button onClick={openModal}>Create a new Task List</Button>
+                        </div>
+                        {showModal && (
+                        <Modal onClose={closeModal}>
+                            <TaskListFormContainer userId={userId} onSuccess={closeModal} />
+                        </Modal>
+                        )}
+                    </div>
                     <User userId={userId} />
                 </div>
             </aside>
-            <main className="tw:ml-[360px] tw:flex-1 tw:p-4">
+            <main className="tw:ml-[360px] tw:mt-[96px] tw:flex-1 tw:p-4">
                 {(!hasTaskLists || !selectedTaskList) ? (
                     <div className="tw:flex tw:flex-col tw:items-center tw:justify-center tw:h-[calc(100vh-200px)]">
                         <div className="tw:text-center">
@@ -82,7 +86,7 @@ function DashboardContent({userId}) {
                     </div>
                 ) : (
                     <>
-                        <div className="tw:mb-4">
+                        <div className="tw:mb-4 tw:w-[220px]">
                             <Button onClick={openNewTaskModal}>Create a new Task</Button>
                             {showNewTaskModal && (
                                 <Modal onClose={closeNewTaskModal}>
