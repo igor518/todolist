@@ -2,9 +2,121 @@
 {% block title %}
     {{ 'DOTaskly' |trans|raw }}
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .parallax-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            perspective: 1px;
+            transform-style: preserve-3d;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .parallax-background {
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+        }
+        
+        .parallax-content {
+            transform: translateZ(0);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #1A237E -3.59%, #03A9F4 94.91%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .colorful-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #1A237E 0%, #3949AB 50%, #03A9F4 100%);
+            box-shadow: 0 8px 32px rgba(26, 35, 126, 0.2);
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .animated-gradient {
+            background: linear-gradient(-45deg, #1A237E, #3949AB, #03A9F4, #29B6F6);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+{% endblock %}
+
 {% block header %}
     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-        <div class="tw:relative tw:flex tw:space-x-4 tw:font-display tw:font-semibold">
+        <div class="tw:relative tw:flex tw:space-x-4 tw:font-display tw:font-semibold fade-in">
             <a href="{{ path('user_register') }}"
                class="tw:relative tw:inline-block tw:text-gray-700 tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition tw:duration-300 tw:overflow-hidden tw:hover:text-white tw:before:absolute tw:before:inset-0 tw:before:bg-white tw:before:transition tw:before:duration-300 tw:before:z-0 tw:hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
             >
@@ -12,9 +124,8 @@
                     {{ 'Register'|trans|raw }}
                 </span>
             </a>
-            <a
-                href="{{ path('user_login') }}"
-                class="tw:relative tw:inline-block tw:text-gray-700 tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition tw:duration-300 tw:overflow-hidden tw:hover:text-white tw:before:absolute tw:before:inset-0 tw:before:bg-white tw:before:transition tw:before:duration-300 tw:before:z-0 tw:hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
+            <a href="{{ path('user_login') }}"
+               class="tw:relative tw:inline-block tw:text-gray-700 tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition tw:duration-300 tw:overflow-hidden tw:hover:text-white tw:before:absolute tw:before:inset-0 tw:before:bg-white tw:before:transition tw:before:duration-300 tw:before:z-0 tw:hover:before:bg-[linear-gradient(90deg,#1A237E_-3.59%,#03A9F4_94.91%)]"
             >
                 <span class="tw:relative tw:z-10">
                     {{ 'Login' |trans|raw }}
@@ -23,61 +134,238 @@
         </div>
     {% endif %}
 {% endblock %}
+
 {% block body %}
-    <main>
-        <section 
-            class="tw:w-full tw:px-6 tw:lg:px-20 tw:py-24 tw:relative tw:flex tw:items-center"
-            style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;"
-        >
-            <div class="tw:max-w-5xl">
-                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <h1 class="tw:text-5xl tw:tracking-wide tw:text-[#1A237E] tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold">
-                        Organize Your Tasks, <br> Boost Your Productivity
-                    </h1>
-                    <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold">
-                        Dream. Plan. Achieve! 🚀
-                    </p>
-                    <p class="tw:mt-4 tw:text-2xl tw:text-white text-left">
-                        Set your plans for the day, week, or month. <br>
-                        Write down your goals, create to-do and dream lists, and take steps toward greatness. <br>
-                        Track your progress and accomplish more!
-                    </p>
-                {% else %}
-                    <h1 class="tw:text-5xl tw:tracking-wide tw:text-[#1A237E] tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold">
-                        Welcome back, {{ app.user.firstname }}! 🙌
-                    </h1>
-                    <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold">
-                        Your tasks are waiting. Let's get things done. ✅
-                    </p>
-                    <p class="tw:mt-4 tw:text-2xl tw:text-white text-left">
-                        Head to your dashboard to check your current tasks, <br> 
-                        refresh your personal goals, reflect on your achievements, review your progress, <br>
-                        and confidently keep moving forward on the path to focus,<br>
-                        effectiveness, and a sense of balance.
-                    </p>
-                {% endif %}
-                <div class="tw:mt-8 tw:flex tw:space-x-6 tw:font-display tw:font-semibold">
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                        <a 
-                            href="{{ path('app_dashboard') }}" 
-                            class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
-                            tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
-                            tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]"
-                        >
-                            {{ 'Dashboard'|trans|raw }}
+    <main class="tw:overflow-hidden">
+        <section class="parallax-section">
+            <div class="parallax-layer parallax-background" style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;"></div>
+            <div class="parallax-layer parallax-content tw:w-full tw:px-6 tw:lg:px-20 tw:py-24 tw:relative tw:flex tw:items-center">
+                <div class="tw:max-w-5xl">
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <h1 class="tw:text-6xl tw:tracking-wide tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold gradient-text fade-in">
+                            Organize Your Tasks, <br> Boost Your Productivity
+                        </h1>
+                        <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold slide-in" style="animation-delay: 0.3s">
+                            Dream. Plan. Achieve! 🚀
+                        </p>
+                        <p class="tw:mt-4 tw:text-2xl tw:text-white text-left slide-in" style="animation-delay: 0.6s">
+                            Set your plans for the day, week, or month. <br>
+                            Write down your goals, create to-do and dream lists, and take steps toward greatness. <br>
+                            Track your progress and accomplish more!
+                        </p>
+                    {% else %}
+                        <h1 class="tw:text-6xl tw:tracking-wide tw:text-left tw:leading-[1.5] tw:font-display tw:font-bold gradient-text fade-in">
+                            Welcome back, {{ app.user.firstname }}! 🙌
+                        </h1>
+                        <p class="tw:mt-4 tw:text-2xl tw:text-white tw:text-left tw:font-display tw:font-semibold slide-in" style="animation-delay: 0.3s">
+                            Your tasks are waiting. Let's get things done. ✅
+                        </p>
+                        <p class="tw:mt-4 tw:text-2xl tw:text-white text-left slide-in" style="animation-delay: 0.6s">
+                            Head to your dashboard to check your current tasks, <br> 
+                            refresh your personal goals, reflect on your achievements, review your progress, <br>
+                            and confidently keep moving forward on the path to focus,<br>
+                            effectiveness, and a sense of balance.
+                        </p>
+                    {% endif %}
+                    <div class="tw:mt-8 tw:flex tw:space-x-6 tw:font-display tw:font-semibold slide-in" style="animation-delay: 0.9s">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('app_dashboard') }}" 
+                               class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
+                               tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
+                               tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6] floating">
+                                {{ 'Dashboard'|trans|raw }}
+                            </a>
+                        {% else %}
+                            <a href="{{ path('user_register') }}" 
+                               class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
+                               tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
+                               tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6] floating">
+                                {{ 'Get started'|trans|raw }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="tw:py-20 tw:bg-gradient-to-b tw:from-white tw:to-gray-50">
+            <div class="tw:max-w-7xl tw:mx-auto tw:px-6 tw:lg:px-8">
+                <div class="tw:text-center tw:mb-16">
+                    <h2 class="tw:text-4xl tw:font-display tw:font-bold tw:gradient-text tw:mb-4">Key Features</h2>
+                    <p class="tw:text-xl tw:text-gray-600">Everything you need to manage your tasks effectively</p>
+                </div>
+                <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-3 tw:gap-8">
+                    <div class="tw:bg-white tw:p-8 tw:rounded-2xl tw:shadow-lg tw:transform tw:transition-all tw:duration-300 tw:hover:scale-105">
+                        <div class="tw:w-16 tw:h-16 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-xl tw:flex tw:items-center tw:justify-center tw:mb-6">
+                            <svg class="tw:w-8 tw:h-8 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                        </div>
+                        <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-4">Task Organization</h3>
+                        <p class="tw:text-gray-600">Create, categorize, and prioritize your tasks with ease. Keep everything organized and accessible.</p>
+                    </div>
+                    <div class="tw:bg-white tw:p-8 tw:rounded-2xl tw:shadow-lg tw:transform tw:transition-all tw:duration-300 tw:hover:scale-105">
+                        <div class="tw:w-16 tw:h-16 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-xl tw:flex tw:items-center tw:justify-center tw:mb-6">
+                            <svg class="tw:w-8 tw:h-8 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-4">Time Management</h3>
+                        <p class="tw:text-gray-600">Set deadlines, track progress, and manage your time effectively with our intuitive tools.</p>
+                    </div>
+                    <div class="tw:bg-white tw:p-8 tw:rounded-2xl tw:shadow-lg tw:transform tw:transition-all tw:duration-300 tw:hover:scale-105">
+                        <div class="tw:w-16 tw:h-16 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-xl tw:flex tw:items-center tw:justify-center tw:mb-6">
+                            <svg class="tw:w-8 tw:h-8 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-4">Progress Tracking</h3>
+                        <p class="tw:text-gray-600">Monitor your achievements and stay motivated with detailed progress reports and analytics.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Colorful Showcase Section -->
+        <section class="tw:py-20 animated-gradient">
+            <div class="tw:max-w-7xl tw:mx-auto tw:px-6 tw:lg:px-8">
+                <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-12 tw:items-center">
+                    <div class="tw:text-white">
+                        <h2 class="tw:text-4xl tw:font-display tw:font-bold tw:mb-6">Experience the Power of DOTaskly</h2>
+                        <p class="tw:text-xl tw:mb-8 tw:opacity-90">Transform your productivity with our intuitive task management platform. Designed for professionals who want to achieve more.</p>
+                        <div class="tw:flex tw:flex-wrap tw:gap-4">
+                            <div class="tw:bg-white tw:bg-opacity-20 tw:px-4 tw:py-2 tw:rounded-full">
+                                <span class="tw:text-[#1A237E] tw:font-semibold">✨ Beautiful UI</span>
+                            </div>
+                            <div class="tw:bg-white tw:bg-opacity-20 tw:px-4 tw:py-2 tw:rounded-full">
+                                <span class="tw:text-[#1A237E] tw:font-semibold">🚀 Fast Performance</span>
+                            </div>
+                            <div class="tw:bg-white tw:bg-opacity-20 tw:px-4 tw:py-2 tw:rounded-full">
+                                <span class="tw:text-[#1A237E] tw:font-semibold">🔒 Secure Platform</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tw:relative">
+                        <div class="colorful-card tw:p-8 tw:rounded-2xl tw:transform tw:rotate-3 floating-card">
+                            <div class="tw:bg-white tw:rounded-xl tw:p-6 tw:shadow-lg tw:min-h-[300px]">
+                                <!-- Window Controls -->
+                                <div class="tw:flex tw:items-center tw:mb-6">
+                                    <div class="tw:w-3 tw:h-3 tw:bg-red-500 tw:rounded-full tw:mr-2 tw:cursor-pointer tw:hover:bg-red-600"></div>
+                                    <div class="tw:w-3 tw:h-3 tw:bg-yellow-500 tw:rounded-full tw:mr-2 tw:cursor-pointer tw:hover:bg-yellow-600"></div>
+                                    <div class="tw:w-3 tw:h-3 tw:bg-green-500 tw:rounded-full tw:mr-2 tw:cursor-pointer tw:hover:bg-green-600"></div>
+                                    <div class="tw:ml-4 tw:text-sm tw:text-[#1A237E] tw:font-medium">DOTaskly Dashboard</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="tw:py-20 tw:bg-gradient-to-b tw:from-gray-50 tw:to-white">
+            <div class="tw:max-w-7xl tw:mx-auto tw:px-6 tw:lg:px-8">
+                <div class="tw:text-center tw:mb-16">
+                    <h2 class="tw:text-4xl tw:font-display tw:font-bold tw:gradient-text tw:mb-4">Why Choose DOTaskly?</h2>
+                    <p class="tw:text-xl tw:text-gray-600">Experience the difference with our powerful task management solution</p>
+                </div>
+                <div class="tw:grid tw:grid-cols-1 tw:md:grid-cols-2 tw:gap-12">
+                    <div class="tw:flex tw:items-start tw:space-x-4">
+                        <div class="tw:flex-shrink-0">
+                            <div class="tw:w-12 tw:h-12 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-full tw:flex tw:items-center tw:justify-center">
+                                <svg class="tw:w-6 tw:h-6 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-2">User-Friendly Interface</h3>
+                            <p class="tw:text-gray-600">Intuitive design that makes task management simple and enjoyable.</p>
+                        </div>
+                    </div>
+                    <div class="tw:flex tw:items-start tw:space-x-4">
+                        <div class="tw:flex-shrink-0">
+                            <div class="tw:w-12 tw:h-12 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-full tw:flex tw:items-center tw:justify-center">
+                                <svg class="tw:w-6 tw:h-6 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-2">Secure & Reliable</h3>
+                            <p class="tw:text-gray-600">Your data is protected with enterprise-grade security measures.</p>
+                        </div>
+                    </div>
+                    <div class="tw:flex tw:items-start tw:space-x-4">
+                        <div class="tw:flex-shrink-0">
+                            <div class="tw:w-12 tw:h-12 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-full tw:flex tw:items-center tw:justify-center">
+                                <svg class="tw:w-6 tw:h-6 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-2">Lightning Fast</h3>
+                            <p class="tw:text-gray-600">Optimized performance for quick task management and updates.</p>
+                        </div>
+                    </div>
+                    <div class="tw:flex tw:items-start tw:space-x-4">
+                        <div class="tw:flex-shrink-0">
+                            <div class="tw:w-12 tw:h-12 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] tw:rounded-full tw:flex tw:items-center tw:justify-center">
+                                <svg class="tw:w-6 tw:h-6 tw:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="tw:text-xl tw:font-display tw:font-semibold tw:mb-2">Always Available</h3>
+                            <p class="tw:text-gray-600">Access your tasks anytime, anywhere with our reliable platform.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="tw:py-20 tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4]">
+            <div class="tw:max-w-7xl tw:mx-auto tw:px-6 tw:lg:px-8 tw:text-center">
+                <h2 class="tw:text-4xl tw:font-display tw:font-bold tw:text-white tw:mb-8">Ready to Boost Your Productivity?</h2>
+                <p class="tw:text-xl tw:text-white tw:mb-12 tw:max-w-3xl tw:mx-auto">Join thousands of users who have transformed their task management experience with DOTaskly.</p>
+                <div class="tw:flex tw:justify-center tw:space-x-6">
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('user_register') }}" 
+                           class="tw:inline-block tw:bg-white tw:text-[#1A237E] tw:px-8 tw:py-4 tw:rounded-xl tw:text-lg tw:font-semibold tw:transition-all tw:duration-300 tw:hover:bg-opacity-90 tw:transform tw:hover:scale-105">
+                            Get Started Free
+                        </a>
+                        <a href="{{ path('user_login') }}" 
+                           class="tw:inline-block tw:border-2 tw:border-white tw:text-white tw:px-8 tw:py-4 tw:rounded-xl tw:text-lg tw:font-semibold tw:transition-all tw:duration-300 tw:hover:bg-white tw:hover:text-[#1A237E] tw:transform tw:hover:scale-105">
+                            Sign In
                         </a>
                     {% else %}
-                        <a 
-                            href="{{ path('user_register') }}" 
-                            class="tw:relative tw:inline-block tw:text-white tw:border tw:border-gray-400 tw:rounded-[10px] tw:px-5 tw:py-3 tw:text-lg tw:font-semibold tw:uppercase tw:tracking-wide tw:transition-all tw:duration-300 
-                            tw:bg-gradient-to-r tw:from-[#1A237E] tw:to-[#03A9F4] 
-                            tw:hover:from-[#3949AB] tw:hover:to-[#29B6F6]"
-                        >
-                            {{ 'Get started'|trans|raw }}
+                        <a href="{{ path('app_dashboard') }}" 
+                           class="tw:inline-block tw:bg-white tw:text-[#1A237E] tw:px-8 tw:py-4 tw:rounded-xl tw:text-lg tw:font-semibold tw:transition-all tw:duration-300 tw:hover:bg-opacity-90 tw:transform tw:hover:scale-105">
+                            Go to Dashboard
                         </a>
                     {% endif %}
                 </div>
             </div>
         </section>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallaxBackground = document.querySelector('.parallax-background');
+                if (parallaxBackground) {
+                    parallaxBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        });
+    </script>
 {% endblock %}
