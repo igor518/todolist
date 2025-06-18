@@ -25,6 +25,7 @@
 {% endblock %}
 {% block body %}
     <main>
+        {# Hero Section #}
         <section 
             class="tw:w-full tw:px-6 tw:lg:px-20 tw:py-24 tw:relative tw:flex tw:items-center"
             style="background: url('{{ asset('images/background_img.png') }}') center/cover no-repeat;"
@@ -79,5 +80,73 @@
                 </div>
             </div>
         </section>
+
+        {# Features Section #}
+        <section class="tw:bg-blue-50 tw:py-16">
+            <div class="tw:max-w-6xl tw:mx-auto tw:px-4">
+                <h2 class="tw:text-3xl tw:font-bold tw:text-center tw:mb-12 tw:text-blue-900">Why Choose DOTaskly?</h2>
+                <div class="tw:grid tw:grid-cols-1 md:tw:grid-cols-3 tw:gap-8">
+                    <div class="tw:bg-white tw:p-8 tw:rounded-xl tw:shadow tw:flex tw:flex-col tw:items-center tw:transition tw:duration-300 tw:hover:tw:shadow-lg">
+                        <i class="fa-solid fa-bolt tw:text-blue-500 tw:text-3xl tw:mb-4"></i>
+                        <h3 class="tw:font-semibold tw:text-xl tw:mb-2 tw:text-blue-800">Easy to Use</h3>
+                        <p class="tw:text-gray-600 tw:text-center">Intuitive interface lets you create, organize, and track your tasks effortlessly.</p>
+                    </div>
+                    <div class="tw:bg-white tw:p-8 tw:rounded-xl tw:shadow tw:flex tw:flex-col tw:items-center tw:transition tw:duration-300 tw:hover:tw:shadow-lg">
+                        <i class="fa-solid fa-layer-group tw:text-blue-500 tw:text-3xl tw:mb-4"></i>
+                        <h3 class="tw:font-semibold tw:text-xl tw:mb-2 tw:text-blue-800">Stay Organized</h3>
+                        <p class="tw:text-gray-600 tw:text-center">Manage multiple lists, set deadlines, and keep your priorities clear.</p>
+                    </div>
+                    <div class="tw:bg-white tw:p-8 tw:rounded-xl tw:shadow tw:flex tw:flex-col tw:items-center tw:transition tw:duration-300 tw:hover:tw:shadow-lg">
+                        <i class="fa-solid fa-chart-line tw:text-blue-500 tw:text-3xl tw:mb-4"></i>
+                        <h3 class="tw:font-semibold tw:text-xl tw:mb-2 tw:text-blue-800">Boost Productivity</h3>
+                        <p class="tw:text-gray-600 tw:text-center">Track your progress and achieve your goals with powerful task management tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# Testimonials Section #}
+        <section class="tw:bg-white tw:py-16">
+            <div class="tw:max-w-4xl tw:mx-auto tw:px-4">
+                <h2 class="tw:text-3xl tw:font-bold tw:text-center tw:mb-12 tw:text-blue-900">What Our Users Say</h2>
+                <div class="tw:grid tw:grid-cols-1 md:tw:grid-cols-2 tw:gap-8">
+                    <div class="tw:bg-blue-100 tw:p-8 tw:rounded-xl tw:shadow tw:flex tw:flex-col">
+                        <p class="tw:italic tw:mb-2 tw:text-lg tw:text-blue-900">“DOTaskly has transformed the way I organize my work. Highly recommended!”</p>
+                        <span class="tw:font-semibold tw:text-blue-700 tw:mt-2">— Alex P.</span>
+                    </div>
+                    <div class="tw:bg-blue-100 tw:p-8 tw:rounded-xl tw:shadow tw:flex tw:flex-col">
+                        <p class="tw:italic tw:mb-2 tw:text-lg tw:text-blue-900">“Simple, clean, and effective. I get more done every day.”</p>
+                        <span class="tw:font-semibold tw:text-blue-700 tw:mt-2">— Maria S.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# FAQ Section #}
+        <section class="tw:bg-blue-50 tw:py-16">
+            <div class="tw:max-w-4xl tw:mx-auto tw:px-4">
+                <h2 class="tw:text-3xl tw:font-bold tw:text-center tw:mb-12 tw:text-blue-900">Frequently Asked Questions</h2>
+                <div class="tw:space-y-8">
+                    <div class="tw:bg-white tw:p-6 tw:rounded-xl tw:shadow">
+                        <h3 class="tw:font-semibold tw:text-blue-800">Is DOTaskly free?</h3>
+                        <p class="tw:text-gray-600">Yes! DOTaskly is free to use for personal productivity.</p>
+                    </div>
+                    <div class="tw:bg-white tw:p-6 tw:rounded-xl tw:shadow">
+                        <h3 class="tw:font-semibold tw:text-blue-800">Can I use DOTaskly on my phone?</h3>
+                        <p class="tw:text-gray-600">DOTaskly is fully responsive and works great on all devices.</p>
+                    </div>
+                    <div class="tw:bg-white tw:p-6 tw:rounded-xl tw:shadow">
+                        <h3 class="tw:font-semibold tw:text-blue-800">How do I get started?</h3>
+                        <p class="tw:text-gray-600">Just register for an account and start creating your first task list!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="tw:bg-blue-900 tw:py-8 tw:mt-12">
+            <div class="tw:max-w-5xl tw:mx-auto tw:text-center tw:text-blue-100 tw:text-lg">
+                &copy; {{ "now"|date("Y") }} DOTaskly. All rights reserved.
+            </div>
+        </footer>
     </main>
 {% endblock %}
