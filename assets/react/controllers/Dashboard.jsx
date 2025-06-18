@@ -97,19 +97,19 @@ function DashboardContent({userId}) {
                         <div className="tw:flex tw:gap-4">
                             <div className="tw:flex-1 tw:min-w-0">
                                 <div className="tw:bg-gray-50 tw:rounded-lg tw:p-4">
-                                    <h2 className="tw:text-lg tw:font-semibold tw:mb-4 tw:text-blue-600">Open</h2>
+                                    <h2 className="tw:text-lg tw:font-semibold tw:mb-4 tw:text-[#A78BFA]">Open</h2>
                                     <TaskContainer taskListId={selectedTaskList} status="open" />
                                 </div>
                             </div>
                             <div className="tw:flex-1 tw:min-w-0">
                                 <div className="tw:bg-gray-50 tw:rounded-lg tw:p-4">
-                                    <h2 className="tw:text-lg tw:font-semibold tw:mb-4 tw:text-yellow-600">In Progress</h2>
+                                    <h2 className="tw:text-lg tw:font-semibold tw:mb-4 tw:text-yellow-500">In Progress</h2>
                                     <TaskContainer taskListId={selectedTaskList} status="in_progress" />
                                 </div>
                             </div>
                             <div className="tw:flex-1 tw:min-w-0">
                                 <div className="tw:bg-gray-50 tw:rounded-lg tw:p-4">
-                                    <h2 className="tw:text-lg tw:font-semibold tw:mb-4 tw:text-green-600">Done</h2>
+                                    <h2 className="tw:text-lg tw:font-semibold tw:mb-4 tw:text-[#22C55E]">Done</h2>
                                     <TaskContainer taskListId={selectedTaskList} status="done" />
                                 </div>
                             </div>

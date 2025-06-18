@@ -39,7 +39,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
     const getStatusColor = (status) => {
         switch (status) {
             case 'open':
-                return 'tw:border-blue-500';
+                return 'tw:border-[#A78BFA]';
             case 'in_progress':
                 return 'tw:border-yellow-500';
             case 'done':
@@ -55,7 +55,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                 return (
                     <button
                         onClick={() => onUpdateStatus(task.node.id, 'in_progress')}
-                        className="tw:bg-yellow-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-yellow-600 tw:transition-colors"
+                        className="tw:bg-gradient-to-r tw:from-[#FACC15] tw:to-[#F59E0B] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#F59E0B] tw:hover:to-[#D97706]"
                     >
                         Start
                     </button>
@@ -65,13 +65,13 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                     <div className="tw:flex tw:gap-2">
                         <button
                             onClick={() => onUpdateStatus(task.node.id, 'open')}
-                            className="tw:bg-blue-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-blue-600 tw:transition-colors"
+                            className="tw:bg-gradient-to-r tw:from-[#A78BFA] tw:to-[#8B5CF6] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#8B5CF6] tw:hover:to-[#7C3AED]"
                         >
                             Stop
                         </button>
                         <button
                             onClick={() => onUpdateStatus(task.node.id, 'done')}
-                            className="tw:bg-green-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-green-600 tw:transition-colors"
+                            className="tw:bg-gradient-to-r tw:from-[#10B981] tw:to-[#059669] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#059669] tw:hover:to-[#047857]"
                         >
                             Done
                         </button>
@@ -81,7 +81,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                 return (
                     <button
                         onClick={() => onUpdateStatus(task.node.id, 'open')}
-                        className="tw:bg-blue-500 tw:text-white tw:px-4 tw:py-1 tw:rounded hover:tw:bg-blue-600 tw:transition-colors"
+                        className="tw:bg-gradient-to-r tw:from-[#A78BFA] tw:to-[#8B5CF6] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#8B5CF6] tw:hover:to-[#7C3AED]"
                     >
                         Reopen
                     </button>
@@ -114,7 +114,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
             {tasks.map((task) => (
                 <div 
                     key={task.node.id} 
-                    className={`tw:bg-white tw:rounded-lg tw:p-4 tw:border-l-4 ${getStatusColor(status)} tw:shadow-sm hover:tw:shadow-md tw:transition-shadow`}
+                    className={`tw:bg-white tw:rounded-lg tw:p-4 tw:border-l-4 ${getStatusColor(status)} tw:shadow-sm tw:hover:shadow-md tw:transition-shadow`}
                 >
                     <div className="tw:flex tw:justify-between tw:items-start tw:mb-2">
                         <h3 className="tw:font-semibold tw:text-lg tw:text-gray-800">{task.node.title}</h3>
@@ -122,7 +122,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                             {getStatusButtons(task)}
                             <button 
                                 onClick={() => onRemoveTask(task.node.id)}
-                                className="tw:text-gray-400 hover:tw:text-red-500 tw:transition-colors"
+                                className="tw:text-gray-400 tw:hover:text-secondary tw:transition-colors"
                             >
                                 ×
                             </button>
@@ -134,7 +134,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                     <div className="tw:flex tw:flex-wrap tw:gap-4 tw:items-center tw:mt-3">
                         <div className="tw:flex tw:items-center tw:gap-2 tw:flex-1">
                             <div className="tw:flex tw:items-center tw:gap-2 tw:min-w-[200px]">
-                                <svg className="tw:w-4 tw:h-4 tw:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="tw:w-4 tw:h-4 tw:text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 {editingProgress === task.node.id ? (
@@ -145,7 +145,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                                             max="100"
                                             value={progressValue}
                                             onChange={(e) => setProgressValue(parseInt(e.target.value))}
-                                            className="tw:w-24"
+                                            className="tw:w-24 tw:accent-[#3B82F6]"
                                         />
                                         <input
                                             type="number"
@@ -154,33 +154,33 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                                             value={progressValue}
                                             onChange={(e) => setProgressValue(parseInt(e.target.value))}
                                             onKeyDown={(e) => handleProgressKeyDown(e, task.node.id)}
-                                            className="tw:w-16 tw:px-2 tw:py-1 tw:border tw:rounded"
+                                            className="tw:w-16 tw:px-2 tw:py-1 tw:border tw:border-[#3B82F6] tw:rounded tw:focus:outline-none tw:focus:ring-2 tw:focus:ring-[#3B82F6] tw:focus:border-transparent"
                                         />
                                         <button
                                             onClick={() => handleProgressSubmit(task.node.id)}
-                                            className="tw:text-blue-500 hover:tw:text-blue-600"
+                                            className="tw:bg-gradient-to-r tw:from-[#3B82F6] tw:to-[#2563EB] tw:text-white tw:px-3 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#2563EB] tw:hover:to-[#1D4ED8] tw:min-w-[60px]"
                                         >
                                             Save
                                         </button>
                                     </div>
                                 ) : (
                                     <div 
-                                        className="tw:flex tw:items-center tw:gap-2 tw:cursor-pointer hover:tw:text-blue-500"
+                                        className="tw:flex tw:items-center tw:gap-2 tw:cursor-pointer tw:hover:text-[#3B82F6]"
                                         onClick={() => handleProgressClick(task)}
                                     >
-                                        <div className="tw:w-24 tw:bg-gray-200 tw:rounded-full tw:h-2">
+                                        <div className="tw:w-24 tw:bg-gray-100 tw:rounded-full tw:h-2">
                                             <div 
-                                                className="tw:bg-blue-500 tw:rounded-full tw:h-2" 
+                                                className="tw:bg-gradient-to-r tw:from-[#3B82F6] tw:to-[#2563EB] tw:rounded-full tw:h-2 tw:transition-all tw:duration-300" 
                                                 style={{width: `${task.node.progress}%`}}
                                             />
                                         </div>
-                                        <span>{task.node.progress}%</span>
+                                        <span className="tw:text-[#3B82F6] tw:font-medium">{task.node.progress}%</span>
                                     </div>
                                 )}
                             </div>
                         </div>
-                        <div className="tw:flex tw:items-center tw:gap-2 tw:text-sm tw:text-gray-500">
-                            <svg className="tw:w-4 tw:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="tw:flex tw:items-center tw:gap-2 tw:text-sm tw:text-[#6B7280]">
+                            <svg className="tw:w-4 tw:h-4 tw:text-[#3B82F6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             Due: {new Date(task.node.dueDate).toLocaleDateString()}
