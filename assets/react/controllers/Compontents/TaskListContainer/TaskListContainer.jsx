@@ -25,7 +25,7 @@ function TaskListContainer({userId, selectedListId, selectTaskListCallback}) {
     });
     const [deleteTaskList] = useMutation(DELETE_TASK_LIST);
 
-    const taskLists = data?.taskLists?.edges || [];
+    const taskLists = (data?.taskLists?.edges || []).slice().reverse();
     const totalPages = Math.ceil(taskLists.length / itemsPerPage);
 
     
