@@ -76,7 +76,7 @@ const TaskList = ({
                     className={`tw:p-2 tw:rounded-lg tw:transition-all tw:duration-200 tw:cursor-pointer ${
                         currentPage === 1
                             ? 'tw:text-gray-400 tw:cursor-not-allowed'
-                            : 'tw:text-secondary tw:hover:bg-blue-50'
+                            : 'tw:text-secondary'
                     }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="tw:h-5 tw:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -92,7 +92,7 @@ const TaskList = ({
                     className={`tw:p-2 tw:rounded-lg tw:transition-all tw:duration-200 tw:cursor-pointer ${
                         currentPage === totalPages
                             ? 'tw:text-gray-400 tw:cursor-not-allowed'
-                            : 'tw:text-secondary tw:hover:bg-blue-50'
+                            : 'tw:text-secondary'
                     }`}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="tw:h-5 tw:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,12 +104,12 @@ const TaskList = ({
     };
 
     return (
-        <>
-            <ul className="tw:space-y-2">
+        <section className="tw:flex tw:flex-col tw:h-full tw:justify-between">
+            <ul className="tw:space-y-2 tw:flex-1 tw:overflow-y-auto">
                 {taskLists.map((taskList) => (
                     <li 
                         key={taskList.node.id} 
-                        className={`tw:p-3 tw:font-text tw:cursor-pointer tw:rounded-lg tw:border tw:border-gray-200 tw:transition-all tw:duration-200 hover:tw:border-blue-300 ${
+                        className={`tw:p-3 tw:font-text tw:cursor-pointer tw:rounded-lg tw:border tw:border-gray-200 tw:transition-all tw:duration-200 tw:hover:border-blue-300 ${
                             selectedListId === taskList.node.id 
                                 ? 'tw:p-2 tw:font-text tw:cursor-pointer tw:bg-blue-100 tw:rounded tw:shadow' 
                                 : 'tw:p-2 tw:font-text tw:cursor-pointer'
@@ -156,7 +156,7 @@ const TaskList = ({
                 ))}
             </ul>
             {renderPagination()}
-        </>
+        </section>
     );
 };
 
