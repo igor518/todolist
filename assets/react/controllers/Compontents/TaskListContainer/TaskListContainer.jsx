@@ -2,7 +2,6 @@ import {useMutation, useQuery} from '@apollo/client';
 import TaskList from '../TaskList/TaskList';
 import {GET_TASK_LISTS, DELETE_TASK_LIST, GET_TASKS} from '../graphql_query'
 import {useEffect, useState} from "react";
-
 /**
  * TaskListContainer is a container component that fetches and manages task lists for a specific user.
  * It handles fetching data, deletion of task lists, and selection logic.
