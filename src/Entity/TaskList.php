@@ -39,7 +39,7 @@ class TaskList
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\OneToOne(cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'taskLists')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
