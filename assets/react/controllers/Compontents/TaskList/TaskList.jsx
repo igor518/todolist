@@ -117,7 +117,7 @@ const TaskList = ({
                         }`} 
                         onClick={() => onSelectList(taskList.node.id)}
                     >
-                        <div className="tw:flex tw:justify-between tw:items-start tw:gap-4">
+                        <div className="tw:flex tw:justify-between tw:items-start tw:gap-4 tw:min-w-[302px]">
                             <div className="tw:flex-1">
                                 <p className="tw:font-semibold tw:text-lg tw:flex tw:items-center tw:gap-2 tw:text-text-main">
                                     <span className="tw:text-secondary tw:text-xl">+</span>
