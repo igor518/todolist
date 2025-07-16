@@ -1,5 +1,6 @@
 import { TailChase } from "ldrs/react";
 import { useState } from "react";
+import './index.css';
 
 /**
  * Component for displaying a list of tasks with interactive features such as selection and removal.
@@ -109,14 +110,14 @@ const TaskList = ({
                 {taskLists.map((taskList) => (
                     <li 
                         key={taskList.node.id} 
-                        className={`tw:p-3 tw:font-text tw:cursor-pointer tw:rounded-lg tw:border tw:border-gray-200 tw:transition-all tw:duration-200 tw:hover:border-blue-300 ${
+                        className={`tasklist-card-scroll tw:p-3 tw:font-text tw:cursor-pointer tw:rounded-lg tw:border tw:border-gray-200 tw:transition-all tw:duration-200 tw:hover:border-blue-300 ${
                             selectedListId === taskList.node.id 
                                 ? 'tw:p-2 tw:font-text tw:cursor-pointer tw:bg-blue-100 tw:rounded tw:shadow' 
                                 : 'tw:p-2 tw:font-text tw:cursor-pointer'
                         }`} 
                         onClick={() => onSelectList(taskList.node.id)}
                     >
-                        <div className="tw:flex tw:justify-between tw:items-start tw:gap-4">
+                        <div className="tw:flex tw:justify-between tw:items-start tw:gap-4 tw:min-w-[302px]">
                             <div className="tw:flex-1">
                                 <p className="tw:font-semibold tw:text-lg tw:flex tw:items-center tw:gap-2 tw:text-text-main">
                                     <span className="tw:text-secondary tw:text-xl">+</span>

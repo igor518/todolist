@@ -1,0 +1,23 @@
+/* Limit the entire card (li) to 1 рядок по горизонталі з горизонтальним скролом */
+.tasklist-card-scroll {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  max-width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #03A9F4 #F8FAFC;
+}
+
+.tasklist-card-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+.tasklist-card-scroll::-webkit-scrollbar-thumb {
+  background: #03A9F4;
+  border-radius: 4px;
+}
+.tasklist-card-scroll::-webkit-scrollbar-track {
+  background: #F8FAFC;
+  border-radius: 4px;
+}
