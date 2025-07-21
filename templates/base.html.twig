@@ -16,7 +16,7 @@
     <body>
         <header class="tw:block tw:px-6 {% if 'dashboard' in app.request.attributes.get('_route') %}tw:fixed tw:top-0 tw:left-0 tw:right-0 tw:z-50{% endif %}">
             <nav class="tw:relative tw:flex tw:items-center tw:justify-between">
-                <a href="{% if not is_granted('IS_AUTHENTICATED_FULLY') %}/{% else %}#{% endif %}" class="tw:flex tw:items-center tw:h-24 tw:py-2">
+                <a href="/" class="tw:flex tw:items-center tw:h-24 tw:py-2">
                     <img src="{{ asset('images/logo.svg') }}" alt="DoTaskly" class="h-auto">
                 </a>
                 <div class="tw:flex tw:items-center tw:gap-4">
