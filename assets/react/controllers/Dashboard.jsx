@@ -7,7 +7,7 @@ import {ApolloClient, InMemoryCache, ApolloProvider, useQuery} from '@apollo/cli
 import User from './Compontents/User/User'
 import Modal from './Compontents/Modal/Modal';
 import TaskFormContainer from './Compontents/TaskFormContainer/TaskFormContainer';
-import { GET_TASK_LISTS } from './Compontents/graphql_query';
+import { GET_TASK_LISTS, GET_USER } from './Compontents/graphql_query';
 
 /**
  * TodoList dashboard
@@ -49,6 +49,22 @@ function DashboardContent({userId}) {
             owner: "api/users/" + userId
         }
     });
+
+    const { data: userData } = useQuery(GET_USER, {
+        variables: {
+            id: "api/users/" + userId
+        }
+    });
+
+    useEffect(() => {
+        if (userData?.user) {
+            const { firstname, lastname } = userData.user;
+            const path = `/dashboard/${firstname}-${lastname}`;
+            const url = new URL(window.location);
+            url.pathname = path;
+            window.history.pushState({}, '', url);
+        }
+    }, [userData]);
 
     const hasTaskLists = taskListsData?.taskLists?.edges?.length > 0;
 
