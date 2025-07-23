@@ -174,3 +174,29 @@ export const UPDATE_TASK = gql`
     }
   }
 `;
+
+/**
+ * GraphQL query to retrieve user information based on a specified user ID.
+ * This query accepts an ID as a parameter and returns the user's details.
+ * It fetches the following fields: id, firstname, lastname, and email.
+ *
+ * Variable:
+ * - id (ID!): The unique identifier of the user to be fetched.
+ *
+ * Returns:
+ * - user: An object containing user details.
+ *   - id (String): Unique identifier of the user.
+ *   - firstname (String): First name of the user.
+ *   - lastname (String): Last name of the user.
+ *   - email (String): Email address of the user.
+ */
+export const GET_USER = gql`
+    query getUser ($id: ID!) {
+        user(id: $id) {
+            id
+            firstname
+            lastname
+            email
+        }
+    }
+`;

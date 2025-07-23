@@ -12,7 +12,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER', statusCode: 403, exceptionCode: 10010)]
 final class DashboardController extends AbstractController
 {
-    #[Route('/dashboard', name: 'app_dashboard')]
+    #[Route('/dashboard/{fullName?}/{taskName?}', name: 'app_dashboard')]
     public function index(): Response
     {
         $userId = $this->getUser()->getId();
