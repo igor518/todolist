@@ -14,7 +14,8 @@ import { useState } from 'react';
  * @param {string} props.status - The status of tasks being displayed ('open', 'in_progress', or 'done').
  * @returns {JSX.Element} The rendered task list or appropriate UI for loading, error, or empty states.
  */
-const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, error, status}) => {
+const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, error, status, onTaskClick, activeTask}) => {
+    console.log('Task props:', { onTaskClick, activeTask });
     const [editingProgress, setEditingProgress] = useState(null);
     const [progressValue, setProgressValue] = useState(0);
 
@@ -54,7 +55,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
             case 'open':
                 return (
                     <button
-                        onClick={() => onUpdateStatus(task.node.id, 'in_progress')}
+                        onClick={(e) => { e.stopPropagation(); onUpdateStatus(task.node.id, 'in_progress'); }}
                         className="tw:bg-gradient-to-r tw:from-[#FACC15] tw:to-[#F59E0B] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#F59E0B] tw:hover:to-[#D97706]"
                     >
                         Start
@@ -64,13 +65,13 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                 return (
                     <div className="tw:flex tw:gap-2">
                         <button
-                            onClick={() => onUpdateStatus(task.node.id, 'open')}
+                            onClick={(e) => { e.stopPropagation(); onUpdateStatus(task.node.id, 'open'); }}
                             className="tw:bg-gradient-to-r tw:from-[#A78BFA] tw:to-[#8B5CF6] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#8B5CF6] tw:hover:to-[#7C3AED]"
                         >
                             Stop
                         </button>
                         <button
-                            onClick={() => onUpdateStatus(task.node.id, 'done')}
+                            onClick={(e) => { e.stopPropagation(); onUpdateStatus(task.node.id, 'done'); }}
                             className="tw:bg-gradient-to-r tw:from-[#10B981] tw:to-[#059669] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#059669] tw:hover:to-[#047857]"
                         >
                             Done
@@ -80,7 +81,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
             case 'done':
                 return (
                     <button
-                        onClick={() => onUpdateStatus(task.node.id, 'open')}
+                        onClick={(e) => { e.stopPropagation(); onUpdateStatus(task.node.id, 'open'); }}
                         className="tw:bg-gradient-to-r tw:from-[#A78BFA] tw:to-[#8B5CF6] tw:text-white tw:px-4 tw:py-1 tw:rounded tw:transition-all tw:duration-300 tw:hover:shadow-lg tw:hover:scale-105 tw:hover:from-[#8B5CF6] tw:hover:to-[#7C3AED]"
                     >
                         Reopen
@@ -111,17 +112,23 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
 
     return (
         <div className="tw:space-y-2">
-            {tasks.map((task) => (
+            {tasks.map((task) => {
+                const isActive = activeTask && activeTask.id === task.node.id;
+                return (
                 <div 
                     key={task.node.id} 
-                    className={`tw:bg-white tw:rounded-lg tw:p-4 tw:border-l-4 ${getStatusColor(status)} tw:shadow-sm tw:hover:shadow-md tw:transition-shadow`}
+                    className={`tw:bg-white tw:rounded-lg tw:p-4 tw:border-l-4 ${getStatusColor(status)} tw:shadow-sm tw:hover:shadow-md tw:transition-shadow ${isActive ? 'tw:ring-2 tw:ring-blue-500' : ''}`}
+                    onClick={() => {
+                        console.log('Task clicked:', task.node);
+                        onTaskClick(task.node);
+                    }}
                 >
                     <div className="tw:flex tw:justify-between tw:items-start tw:mb-2">
                         <h3 className="tw:font-semibold tw:text-lg tw:text-gray-800">{task.node.title}</h3>
                         <div className="tw:flex tw:items-center tw:gap-2">
                             {getStatusButtons(task)}
                             <button 
-                                onClick={() => onRemoveTask(task.node.id)}
+                                onClick={(e) => { e.stopPropagation(); onRemoveTask(task.node.id); }}
                                 className="tw:text-gray-400 tw:hover:text-secondary tw:transition-colors"
                             >
                                 ×
@@ -187,7 +194,7 @@ const Task = ({tasks, onRemoveTask, onUpdateStatus, onUpdateProgress, loading, e
                         </div>
                     </div>
                 </div>
-            ))}
+            )})}
         </div>
     );
 };
