@@ -10,7 +10,7 @@ import {GET_TASKS, DELETE_TASK, UPDATE_TASK} from '../graphql_query'
  * @param {string} props.status The status of tasks to display ('open', 'in_progress', or 'done').
  * @return {JSX.Element} The rendered Task component with fetched tasks, loading status, and error information.
  */
-function TaskContainer({taskListId, status}) {
+function TaskContainer({taskListId, status, onTaskClick, activeTask}) {
     const [deleteTask] = useMutation(DELETE_TASK);
     const [updateTask] = useMutation(UPDATE_TASK);
     const {data, loading, error} = useQuery(GET_TASKS, {
@@ -110,6 +110,8 @@ function TaskContainer({taskListId, status}) {
             onUpdateStatus={onUpdateStatus}
             onUpdateProgress={onUpdateProgress}
             status={status}
+            onTaskClick={onTaskClick}
+            activeTask={activeTask}
         />
     );
 }
