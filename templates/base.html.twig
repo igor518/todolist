@@ -12,6 +12,10 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <meta name="description" content="Simple task management application built with Symfony 7.0">
+        <meta name="keywords" content="time management, tasks, task lists, daily schedule">
+        <meta name="author" content="Ihor Chernin">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <header class="tw:block tw:px-6 {% if 'dashboard' in app.request.attributes.get('_route') %}tw:fixed tw:top-0 tw:left-0 tw:right-0 tw:z-50{% endif %}">
